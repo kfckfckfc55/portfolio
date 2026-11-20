@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio</title>
+  <meta name="theme-color" content="#020617">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Mọi nội dung được lấy từ data.js – không cần sửa file này -->
+
+  <!-- ========== Thanh điều hướng ========== -->
+  <nav class="nav" id="nav" aria-label="Menu">
+    <span class="nav-pill" id="navPill" aria-hidden="true"></span>
+    <span class="nav-buddy" id="navBuddy" aria-hidden="true"><i></i><i></i></span>
+    <a href="#home" class="nav-link" data-sec="home" data-t="nav.home"></a>
+    <a href="#about" class="nav-link" data-sec="about" data-t="nav.about"></a>
+    <a href="#portfolio" class="nav-link" data-sec="portfolio" data-t="nav.portfolio"></a>
+    <a href="#contact" class="nav-link" data-sec="contact" data-t="nav.contact"></a>
+    <button class="lang" id="lang" type="button" aria-label="VI / EN">EN</button>
+  </nav>
+
+  <main>
+    <!-- ========== 1. HERO ========== -->
+    <section class="hero" id="home">
+      <div class="hero-bg" id="heroBg"></div>
+      <canvas class="hero-stars" id="stars" aria-hidden="true"></canvas>
+      <svg class="hero-mountains" id="heroMountains" viewBox="0 0 1440 420" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+        <defs>
+          <linearGradient id="g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3b5998"/><stop offset="1" stop-color="#14254d"/></linearGradient>
+          <linearGradient id="g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1b2f5e"/><stop offset="1" stop-color="#0a1530"/></linearGradient>
+          <linearGradient id="g3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0c1a38"/><stop offset="1" stop-color="#020617"/></linearGradient>
+        </defs>
+        <g data-depth="0.1"><path fill="url(#g1)" d="M0 270 L110 215 L200 250 L330 160 L450 230 L560 180 L720 60 L850 175 L960 135 L1080 215 L1200 125 L1320 205 L1440 165 V420 H0Z"/><path fill="#e6eeff" d="M720 60 L772 106 L750 101 L734 116 L716 98 L692 110 L676 96Z"/></g>
+        <g data-depth="0.2"><path fill="url(#g2)" d="M0 310 L130 255 L250 295 L390 225 L520 290 L650 240 L790 305 L910 250 L1050 300 L1190 235 L1330 290 L1440 260 V420 H0Z"/></g>
+        <g data-depth="0.32"><path fill="url(#g3)" d="M0 360 Q180 315 360 352 T720 345 T1080 355 T1440 335 V420 H0Z"/></g>
+      </svg>
+      <div class="hero-shade"></div>
+      <div class="hero-text">
+        <p class="hero-hello reveal" data-t="hero.hello"></p>
+        <h1 class="hero-name reveal" data-f="name"></h1>
+        <p class="hero-role reveal" data-f="role"></p>
+      </div>
+      <a class="hero-scroll" href="#about" aria-label="Scroll"><span></span></a>
+    </section>
+
+    <!-- ========== 2. VỀ TÔI ========== -->
+    <section class="about topo-dark" id="about">
+      <div class="wrap">
+        <h2 class="title-xl reveal" data-t="about.title"></h2>
+
+        <div class="intro">
+          <div class="intro-a reveal">
+            <p class="intro-hi" data-t="about.hi"></p>
+            <h3 class="intro-name" data-f="name"></h3>
+            <a class="btn" id="cvBtn" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h5"/></svg>
+              <span data-t="btn.cv"></span>
+            </a>
+          </div>
+          <div class="intro-b reveal">
+            <div class="portrait" id="portrait"></div>
+          </div>
+          <div class="intro-c reveal">
+            <p class="intro-text" data-f="about"></p>
+            <a class="btn" href="#portfolio">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6M8 6l-6 6 6 6"/></svg>
+              <span data-t="btn.projects"></span>
+            </a>
+          </div>
+        </div>
+
+        <div class="journey">
+          <div class="journey-col reveal">
+            <h3 data-t="about.edu"></h3>
+            <ol class="steps" id="eduList"></ol>
+          </div>
+          <div class="journey-col reveal">
+            <h3 data-t="about.exp"></h3>
+            <ol class="steps" id="expList"></ol>
+          </div>
+        </div>
+
+        <div class="folders" id="folders"></div>
+      </div>
+    </section>
+
+    <!-- ========== 3. CHỮ LỚN ========== -->
+    <section class="mega topo-dark" aria-hidden="true">
+      <p class="mega-text" id="megaText">PORTFOLIO</p>
+      <span class="mega-arrow">↘</span>
+    </section>
+
+    <!-- ========== 4. PORTFOLIO ========== -->
+    <section class="works topo-light" id="portfolio">
+      <div class="wrap">
+        <h2 class="title-xl dark reveal" data-t="pf.title"></h2>
+        <div class="tabs reveal" id="tabs" role="tablist">
+          <span class="tabs-pill" id="tabsPill"></span>
+        </div>
+      </div>
+      <div class="carousel reveal">
+        <button class="car-btn prev" id="prev" type="button" aria-label="Trước">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+        </button>
+        <div class="track" id="track"></div>
+        <button class="car-btn next" id="next" type="button" aria-label="Sau">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+        </button>
+      </div>
+    </section>
+
+    <!-- ========== 5. ẢNH HOẠT ĐỘNG ========== -->
+    <section class="gallery topo-light" id="gallery" hidden>
+      <div class="gallery-stage" id="galleryStage"></div>
+    </section>
+
+    <!-- ========== 6. LIÊN HỆ ========== -->
+    <section class="contact topo-light" id="contact">
+      <div class="wrap">
+        <h2 class="title-xl dark reveal" data-t="ct.title"></h2>
+        <div class="contact-grid">
+          <form class="panel form reveal" id="form">
+            <h3 class="panel-blue" data-t="ct.formTitle"></h3>
+            <p class="panel-lead" data-t="ct.formLead"></p>
+            <label class="inp">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>
+              <input name="n" required data-ph="ct.name">
+            </label>
+            <label class="inp">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
+              <input name="e" type="email" required data-ph="ct.email">
+            </label>
+            <label class="inp area">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              <textarea name="m" rows="5" required data-ph="ct.msg"></textarea>
+            </label>
+            <button class="btn full" type="submit">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+              <span data-t="ct.send"></span>
+            </button>
+          </form>
+
+          <div class="panel findme reveal">
+            <h3 data-t="ct.find"></h3>
+            <ul id="socials"></ul>
+            <div class="findme-photo" id="contactPhoto"></div>
+          </div>
+        </div>
+      </div>
+      <footer class="foot">© <span id="yr"></span> <b data-f="name"></b>. <span data-t="foot"></span></footer>
+    </section>
+  </main>
+
+  <!-- Hộp chi tiết -->
+  <dialog class="modal" id="modal">
+    <button class="modal-x" type="button" aria-label="Đóng" data-close>×</button>
+    <div id="modalBody"></div>
+  </dialog>
+
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
