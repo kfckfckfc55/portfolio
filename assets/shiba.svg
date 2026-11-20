@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- tai -->
+  <path fill="#17171c" d="M8 33 L12.5 6.5 Q14 3.5 16.8 5.4 L30 17 Z"/>
+  <path fill="#17171c" d="M56 33 L51.5 6.5 Q50 3.5 47.2 5.4 L34 17 Z"/>
+  <path fill="#e8c39a" d="M13 25 L15.2 11 L24.5 18.6 Z"/>
+  <path fill="#e8c39a" d="M51 25 L48.8 11 L39.5 18.6 Z"/>
+  <!-- đầu -->
+  <ellipse cx="32" cy="37" rx="24.5" ry="21" fill="#17171c"/>
+  <!-- viền nâu vàng + má kem (urajiro) -->
+  <path fill="#c98a4b" d="M11.5 38.5 Q13 55.5 32 59.5 Q51 55.5 52.5 38.5 Q46 45 39.5 42.5 Q36 38.5 32 38.5 Q28 38.5 24.5 42.5 Q18 45 11.5 38.5 Z"/>
+  <path fill="#f6ead9" d="M13.5 41 Q16 55 32 58 Q48 55 50.5 41 Q45 46.5 39 44.6 Q35.8 41 32 41 Q28.2 41 25 44.6 Q19 46.5 13.5 41 Z"/>
+  <!-- chấm lông mày -->
+  <ellipse cx="22.5" cy="27.5" rx="3.4" ry="2.3" fill="#d99a5b"/>
+  <ellipse cx="41.5" cy="27.5" rx="3.4" ry="2.3" fill="#d99a5b"/>
+  <!-- mắt -->
+  <g class="eyes">
+    <ellipse cx="23" cy="34.2" rx="3.3" ry="3.5" fill="#050507" stroke="#3a2a1f" stroke-width="1"/>
+    <ellipse cx="41" cy="34.2" rx="3.3" ry="3.5" fill="#050507" stroke="#3a2a1f" stroke-width="1"/>
+    <circle cx="24.3" cy="32.9" r="1.25" fill="#fff"/>
+    <circle cx="42.3" cy="32.9" r="1.25" fill="#fff"/>
+  </g>
+  <!-- mũi, miệng, lưỡi -->
+  <path fill="#ff8fa3" d="M29.6 51.2 Q32 57.2 34.4 51.2 Z"/>
+  <ellipse cx="32" cy="45.6" rx="4.2" ry="2.9" fill="#0b0b0e"/>
+  <ellipse cx="30.9" cy="44.7" rx="1.2" ry=".7" fill="#fff" opacity=".55"/>
+  <path d="M32 48.3 V50.4 M27.4 50.6 Q29.8 53.3 32 50.4 Q34.2 53.3 36.6 50.6" fill="none" stroke="#0b0b0e" stroke-width="1.4" stroke-linecap="round"/>
+</svg>
