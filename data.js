@@ -23,9 +23,9 @@ const PORTFOLIO = {
   heroForeground: "assets/hero-fg.webp",
   // Ảnh chân dung ở phần "Về tôi" (nên là ảnh đã xoá nền, dạng .png). Trống = chữ viết tắt.
   avatar: "assets/avatar.webp",
-  // Ảnh lớp phủ: hiện mặc định, rê chuột vào thì lộ ảnh chân dung thật ở dưới.
-  // Nên cùng khung hình với ảnh chân dung. Trống = chỉ hiện ảnh chân dung.
-  avatarAlt: "assets/avatar-topo.webp",
+  // Ảnh hiện ra khi rê chuột / chạm vào chân dung (vd: ảnh Spider-Man của bạn).
+  // Nên cùng khung hình với ảnh chân dung để khớp mặt. Trống = tắt hiệu ứng.
+  avatarAlt: "assets/avatar-spider.webp",
   // Ảnh nhỏ ở khung "Tìm tôi tại" (ảnh lúc đi sự kiện, thuyết trình...).
   contactPhoto: "",
 
@@ -114,7 +114,7 @@ const PORTFOLIO = {
 
   /* ---------- Ảnh hoạt động (hiện rải rác, nghiêng nghiêng) ---------- */
   // Thêm đường dẫn ảnh, vd: ["assets/g1.jpg", "assets/g2.jpg"]. Trống = ẩn phần này.
-  gallery: ["assets/trip-castle.webp", "assets/trip-lake.webp", "assets/trip-sunset.webp"],
+  gallery: ["assets/trip-castle.webp", "assets/trip-lake.webp", "assets/trip-sunset.webp", "assets/trip-lake-rock.webp"],
 
   /* ---------- Liên hệ ---------- */
   contact: {
