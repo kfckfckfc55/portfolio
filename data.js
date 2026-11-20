@@ -20,7 +20,7 @@ const PORTFOLIO = {
   heroImage: "assets/hero-cliff.webp",
   // Ảnh tiền cảnh đã tách bầu trời (WebP/PNG trong suốt). Có ảnh này thì phần trời
   // sẽ là bầu trời đêm navy với cực quang và sao băng (ưu tiên hơn heroImage).
-  heroForeground: "assets/hero-fg.webp",
+  heroForeground: "assets/hero-fg-dark.webp",
   // Ảnh chân dung ở phần "Về tôi" (nên là ảnh đã xoá nền, dạng .png). Trống = chữ viết tắt.
   avatar: "assets/avatar.webp",
   // Ảnh hiện ra khi rê chuột / chạm vào chân dung (vd: ảnh Spider-Man của bạn).
