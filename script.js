@@ -116,12 +116,12 @@
       document.body.classList.add("has-hero-img");
     }
 
-    // Chân dung: nếu có ảnh lớp phủ (avatarAlt) → rê chuột để lộ ảnh thật bên dưới
+    // Chân dung: mặc định hiện ảnh thật; rê chuột / chạm vào thì lộ ảnh avatarAlt (vd: ảnh Spider-Man)
     const pt = $("#portrait"), two = D.avatar && D.avatarAlt;
     pt.innerHTML = two
       ? `<span class="portrait-glow"></span>
-         <img class="p-img p-base" src="${esc(IMG(D.avatar))}" alt="${esc(L(D.name))}">
-         <img class="p-img p-top" src="${esc(IMG(D.avatarAlt))}" alt="">
+         <img class="p-img p-alt" src="${esc(IMG(D.avatarAlt))}" alt="">
+         <img class="p-img p-top" src="${esc(IMG(D.avatar))}" alt="${esc(L(D.name))}">
          <span class="lens-ring"></span>`
       : D.avatar
         ? `<img src="${esc(IMG(D.avatar))}" alt="${esc(L(D.name))}">`
@@ -251,7 +251,9 @@
     sec.hidden = false;
     // vị trí rải rác cố định (lặp lại nếu nhiều ảnh)
     // vị trí rải quanh tiêu đề ở giữa
-    const spots = [[7, 6, -7], [66, 3, 6], [9, 60, 5], [62, 60, -5], [34, 84, 3], [80, 32, -3], [30, 0, 4], [44, 70, -2]];
+    const spots = innerWidth < 720
+      ? [[3, 3, -6], [52, 6, 5], [5, 70, 4], [53, 67, -5], [28, 88, 3], [60, 36, -3], [2, 36, 4], [30, 0, -2]]
+      : [[7, 6, -7], [66, 3, 6], [9, 60, 5], [62, 60, -5], [34, 84, 3], [80, 32, -3], [30, 0, 4], [44, 70, -2]];
     $("#galleryStage").innerHTML = imgs.map((src, i) => {
       const [x, y, r] = spots[i % spots.length];
       const sp = (0.15 + (i % 4) * 0.1).toFixed(2);
@@ -472,7 +474,7 @@
     }
     $$(".g-item").forEach(f => {
       const rr = f.getBoundingClientRect();
-      f.style.translate = `0 ${(rr.top + rr.height / 2 - vh / 2) * -f.dataset.speed}px`;
+      f.style.translate = `0 ${(rr.top + rr.height / 2 - vh / 2) * -f.dataset.speed * (innerWidth < 720 ? .35 : 1)}px`;
     });
   }
 
