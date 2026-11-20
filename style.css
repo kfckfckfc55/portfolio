@@ -422,11 +422,7 @@ svg { flex-shrink: 0; }
 .portrait { --mx: 50%; --my: 40%; --lens: 0px; transition: --lens .45s cubic-bezier(.2, .8, .2, 1); cursor: crosshair; touch-action: pan-y; }
 .portrait.lens-on { --lens: 140px; }
 .portrait .p-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top; }
-/* lớp trên (ảnh thật) bị khoét lỗ tại con trỏ; lớp dưới (ảnh khi rê chuột) chỉ hiện trong lỗ đó */
-.portrait .p-top {
-  -webkit-mask-image: radial-gradient(circle var(--lens) at var(--mx) var(--my), transparent 72%, #000 100%);
-          mask-image: radial-gradient(circle var(--lens) at var(--mx) var(--my), transparent 72%, #000 100%);
-}
+/* ảnh thật luôn ở dưới; ảnh khi rê chuột (vd Spider-Man) chỉ phủ lên trong vòng tròn quanh con trỏ */
 .portrait .p-alt {
   -webkit-mask-image: radial-gradient(circle var(--lens) at var(--mx) var(--my), #000 72%, transparent 100%);
           mask-image: radial-gradient(circle var(--lens) at var(--mx) var(--my), #000 72%, transparent 100%);

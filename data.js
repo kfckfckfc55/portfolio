@@ -25,7 +25,7 @@ const PORTFOLIO = {
   avatar: "assets/avatar.webp",
   // Ảnh hiện ra khi rê chuột / chạm vào chân dung (vd: ảnh Spider-Man của bạn).
   // Nên cùng khung hình với ảnh chân dung để khớp mặt. Trống = tắt hiệu ứng.
-  avatarAlt: "assets/avatar-topo.webp",
+  avatarAlt: "assets/avatar-spider.webp",
   // Ảnh nhỏ ở khung "Tìm tôi tại" (ảnh lúc đi sự kiện, thuyết trình...).
   contactPhoto: "",
 

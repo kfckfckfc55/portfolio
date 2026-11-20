@@ -120,8 +120,8 @@
     const pt = $("#portrait"), two = D.avatar && D.avatarAlt;
     pt.innerHTML = two
       ? `<span class="portrait-glow"></span>
+         <img class="p-img p-base" src="${esc(IMG(D.avatar))}" alt="${esc(L(D.name))}">
          <img class="p-img p-alt" src="${esc(IMG(D.avatarAlt))}" alt="">
-         <img class="p-img p-top" src="${esc(IMG(D.avatar))}" alt="${esc(L(D.name))}">
          <span class="lens-ring"></span>`
       : D.avatar
         ? `<img src="${esc(IMG(D.avatar))}" alt="${esc(L(D.name))}">`
