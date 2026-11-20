@@ -25,7 +25,10 @@
       "ct.title": "Liên hệ", "ct.formTitle": "Liên hệ", "ct.formLead": "Bạn có điều gì muốn trao đổi? Gửi lời nhắn cho mình nhé!",
       "ct.name": "Tên của bạn", "ct.email": "Email của bạn", "ct.msg": "Lời nhắn", "ct.send": "Gửi lời nhắn",
       "ct.find": "Tìm tôi tại", "ct.linkedin": "Kết nối", "ct.linkedinSub": "trên LinkedIn",
-      "foot": "Đã đăng ký bản quyền.", "tools": "Công cụ / chủ đề"
+      "foot": "Đã đăng ký bản quyền.", "tools": "Công cụ / chủ đề",
+      "alt": "Độ cao", "k.about": "Chặng 01 · Khởi hành", "k.pf": "Chặng 02 · Những gì tôi làm",
+      "k.gal": "Chặng 03 · Trên đường", "gal.title": "Những nơi tôi đã đi qua", "gal.sub": "Mỗi chuyến đi là một góc nhìn mới.",
+      "k.ct": "Đích đến · Kết nối", "hint": "Rê chuột vào ảnh", "hintTouch": "Chạm và kéo trên ảnh"
     },
     en: {
       "nav.home": "Home", "nav.about": "About", "nav.portfolio": "Portfolio", "nav.contact": "Contact",
@@ -38,7 +41,10 @@
       "ct.title": "Contact Me", "ct.formTitle": "Contact", "ct.formLead": "Anything you'd like to discuss? Just send me a message!",
       "ct.name": "Your name", "ct.email": "Your email", "ct.msg": "Your message", "ct.send": "Send message",
       "ct.find": "Find Me", "ct.linkedin": "Let's Connect", "ct.linkedinSub": "on LinkedIn",
-      "foot": "All rights reserved.", "tools": "Tools / topics"
+      "foot": "All rights reserved.", "tools": "Tools / topics",
+      "alt": "Altitude", "k.about": "Stage 01 · Departure", "k.pf": "Stage 02 · What I do",
+      "k.gal": "Stage 03 · On the road", "gal.title": "Places I've been", "gal.sub": "Every trip is a new perspective.",
+      "k.ct": "Summit · Let's connect", "hint": "Hover over the photo", "hintTouch": "Touch & drag the photo"
     }
   };
 
@@ -101,16 +107,29 @@
     const cv = $("#cvBtn");
     if (D.cvLink) cv.href = D.cvLink; else cv.hidden = true;
 
-    // Ảnh hero
-    if (D.heroImage) {
+    // Ảnh hero: ưu tiên ảnh tiền cảnh đã tách trời → bầu trời đêm + cực quang + sao băng
+    if (D.heroForeground) {
+      $("#heroFg").src = IMG(D.heroForeground);
+      document.body.classList.add("has-hero-fg");
+    } else if (D.heroImage) {
       $("#heroBg").style.backgroundImage = `url("${IMG(D.heroImage)}")`;
       document.body.classList.add("has-hero-img");
     }
 
-    // Chân dung
-    $("#portrait").innerHTML = D.avatar
-      ? `<img src="${esc(IMG(D.avatar))}" alt="${esc(L(D.name))}">`
-      : `<span class="portrait-ph">${esc(initials(D.name))}</span>`;
+    // Chân dung: nếu có ảnh lớp phủ (avatarAlt) → rê chuột để lộ ảnh thật bên dưới
+    const pt = $("#portrait"), two = D.avatar && D.avatarAlt;
+    pt.innerHTML = two
+      ? `<span class="portrait-glow"></span>
+         <img class="p-img p-base" src="${esc(IMG(D.avatar))}" alt="${esc(L(D.name))}">
+         <img class="p-img p-top" src="${esc(IMG(D.avatarAlt))}" alt="">
+         <span class="lens-ring"></span>`
+      : D.avatar
+        ? `<img src="${esc(IMG(D.avatar))}" alt="${esc(L(D.name))}">`
+        : `<span class="portrait-ph">${esc(initials(D.name))}</span>`;
+    pt.classList.toggle("dual", !!two);
+    const hint = $("#portraitHint");
+    hint.hidden = !two;
+    if (two) hint.querySelector("span").textContent = t(matchMedia("(hover: none)").matches ? "hintTouch" : "hint");
 
     // Ảnh ở khung liên hệ
     const cp = $("#contactPhoto");
@@ -231,7 +250,8 @@
     if (!imgs.length) { sec.hidden = true; return; }
     sec.hidden = false;
     // vị trí rải rác cố định (lặp lại nếu nhiều ảnh)
-    const spots = [[8, 6, -6], [58, 2, 4], [32, 30, -3], [76, 34, 7], [4, 58, 5], [50, 60, -5], [22, 82, 3], [70, 80, -4]];
+    // vị trí rải quanh tiêu đề ở giữa
+    const spots = [[7, 6, -7], [66, 3, 6], [9, 60, 5], [62, 60, -5], [34, 84, 3], [80, 32, -3], [30, 0, 4], [44, 70, -2]];
     $("#galleryStage").innerHTML = imgs.map((src, i) => {
       const [x, y, r] = spots[i % spots.length];
       const sp = (0.15 + (i % 4) * 0.1).toFixed(2);
@@ -239,7 +259,11 @@
         <img src="${esc(IMG(src))}" alt="" loading="lazy"></figure>`;
     }).join("");
     $("#galleryStage").style.height = `${Math.ceil(imgs.length / spots.length) * 100}%`;
-    $$(".g-item img").forEach(im => im.addEventListener("click", () => openModal({ image: im.getAttribute("src") })));
+    $$(".g-item img").forEach(im => {
+      im.addEventListener("click", () => openModal({ image: im.getAttribute("src") }));
+      const mark = () => im.parentElement.classList.toggle("wide", im.naturalWidth > im.naturalHeight * 1.15);
+      im.complete ? mark() : im.addEventListener("load", mark);
+    });
   }
 
   function renderSocials() {
@@ -286,7 +310,12 @@
     const pill = $("#navPill"), buddy = $("#navBuddy");
     pill.style.width = on.offsetWidth + "px";
     pill.style.transform = `translateX(${on.offsetLeft}px)`;
-    buddy.style.transform = `translateX(${on.offsetLeft + on.offsetWidth - 22}px)`;
+    const bx = on.offsetLeft + on.offsetWidth - buddy.offsetWidth * .7;
+    if (buddy._x !== undefined && Math.abs(buddy._x - bx) > 2) {
+      buddy.classList.remove("hop"); void buddy.offsetWidth; buddy.classList.add("hop");
+    }
+    buddy._x = bx;
+    buddy.style.transform = `translateX(${bx}px)`;
   }
   const secObs = new IntersectionObserver(es => es.forEach(e => {
     if (!e.isIntersecting) return;
@@ -307,7 +336,7 @@
 
   /* ---------- Bầu trời sao (khi không có ảnh hero) ---------- */
   const cv = $("#stars"), cx = cv.getContext("2d");
-  let stars = [], shoot = null;
+  let stars = [], meteors = [];
   function sizeStars() {
     const r = Math.min(devicePixelRatio || 1, 2);
     cv.width = cv.offsetWidth * r; cv.height = cv.offsetHeight * r; cx.setTransform(r, 0, 0, r, 0, 0);
@@ -317,7 +346,8 @@
     }));
   }
   function drawStars() {
-    if (D.heroImage) return;
+    if (D.heroImage && !D.heroForeground) return;
+    if (scrollY > innerHeight * 1.1) { requestAnimationFrame(drawStars); return; }
     const w = cv.offsetWidth, h = cv.offsetHeight;
     cx.clearRect(0, 0, w, h);
     for (const s of stars) {
@@ -326,17 +356,96 @@
       cx.beginPath(); cx.arc(s.x, s.y, s.r, 0, 7); cx.fillStyle = "#fff"; cx.fill();
     }
     cx.globalAlpha = 1;
+    // sao băng rơi chéo từ trên phải xuống
     if (!reduce) {
-      if (!shoot && Math.random() < .004) shoot = { x: Math.random() * w * .7, y: Math.random() * h * .3, l: 0 };
-      if (shoot) {
-        const g = cx.createLinearGradient(shoot.x, shoot.y, shoot.x - 90, shoot.y - 40);
-        g.addColorStop(0, `rgba(255,255,255,${1 - shoot.l / 50})`); g.addColorStop(1, "rgba(255,255,255,0)");
-        cx.strokeStyle = g; cx.lineWidth = 1.5; cx.beginPath();
-        cx.moveTo(shoot.x, shoot.y); cx.lineTo(shoot.x - 90, shoot.y - 40); cx.stroke();
-        shoot.x += 9; shoot.y += 4; if (++shoot.l > 50) shoot = null;
+      if (meteors.length < 3 && Math.random() < .014) meteors.push({
+        x: w * (.3 + Math.random() * .75), y: -20 + Math.random() * h * .3,
+        vx: -(6 + Math.random() * 4), vy: 3 + Math.random() * 2.5,
+        l: 0, max: 45 + Math.random() * 35, len: 100 + Math.random() * 90
+      });
+      for (const m of meteors) {
+        const n = Math.hypot(m.vx, m.vy), tx = m.x - m.vx / n * m.len, ty = m.y - m.vy / n * m.len;
+        const a = Math.min(1, m.l / 6) * (1 - m.l / m.max);
+        const g = cx.createLinearGradient(m.x, m.y, tx, ty);
+        g.addColorStop(0, `rgba(255,255,255,${a})`);
+        g.addColorStop(.25, `rgba(165,243,252,${a * .55})`);
+        g.addColorStop(1, "rgba(165,243,252,0)");
+        cx.strokeStyle = g; cx.lineWidth = 1.7; cx.lineCap = "round";
+        cx.beginPath(); cx.moveTo(m.x, m.y); cx.lineTo(tx, ty); cx.stroke();
+        cx.globalAlpha = a; cx.beginPath(); cx.arc(m.x, m.y, 1.9, 0, 7); cx.fillStyle = "#fff"; cx.fill(); cx.globalAlpha = 1;
+        m.x += m.vx; m.y += m.vy; m.l++;
       }
+      meteors = meteors.filter(m => m.l < m.max);
     }
     requestAnimationFrame(drawStars);
+  }
+
+  /* ---------- Kính lúp trên chân dung ---------- */
+  const portrait = $("#portrait");
+  function lensAt(e) {
+    if (!portrait.classList.contains("dual")) return;
+    const r = portrait.getBoundingClientRect();
+    portrait.style.setProperty("--mx", `${e.clientX - r.left}px`);
+    portrait.style.setProperty("--my", `${e.clientY - r.top}px`);
+    portrait.classList.add("lens-on");
+  }
+  portrait.addEventListener("pointermove", lensAt);
+  portrait.addEventListener("pointerdown", lensAt);
+  ["pointerleave", "pointercancel"].forEach(ev => portrait.addEventListener(ev, () => portrait.classList.remove("lens-on")));
+  portrait.addEventListener("pointerup", e => { if (e.pointerType !== "mouse") portrait.classList.remove("lens-on"); });
+
+  /* ---------- Thước đo độ cao ---------- */
+  const SUMMIT = 1500;
+  const alt = $("#alt"), altVal = $("#altVal"), altDot = $("#altDot");
+  function altitude() {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    const p = max > 0 ? Math.min(1, scrollY / max) : 0;
+    alt.classList.toggle("show", scrollY > innerHeight * .4);
+    altDot.style.bottom = (p * 100) + "%";
+    altVal.textContent = (Math.round(p * SUMMIT / 10) * 10).toLocaleString(lang === "vi" ? "vi-VN" : "en-US") + " m";
+  }
+
+  /* ---------- Cực quang (canvas nhỏ, CSS làm mờ) ---------- */
+  const au = $("#aurora"), ax = au.getContext("2d");
+  const AW = 240, AH = 120;
+  au.width = AW; au.height = AH;
+  function curtain(c1, c2) {
+    const s = document.createElement("canvas"); s.width = 1; s.height = 64;
+    const sx = s.getContext("2d"), g = sx.createLinearGradient(0, 0, 0, 64);
+    g.addColorStop(0, "rgba(0,0,0,0)");
+    g.addColorStop(.5, `rgba(${c2},.32)`);
+    g.addColorStop(.9, `rgba(${c1},.95)`);
+    g.addColorStop(1, "rgba(0,0,0,0)");
+    sx.fillStyle = g; sx.fillRect(0, 0, 1, 64);
+    return s;
+  }
+  const bands = [
+    { s: curtain("94,234,212", "167,139,250"), base: .66, amp: .09, f1: .032, f2: .011, sp: .35, h: .58, ph: 0 },
+    { s: curtain("56,189,248", "129,140,248"), base: .52, amp: .07, f1: .026, f2: .017, sp: -.25, h: .46, ph: 2 },
+    { s: curtain("110,231,183", "56,189,248"), base: .76, amp: .05, f1: .05, f2: .009, sp: .5, h: .32, ph: 4 }
+  ];
+  let at = 0, lastA = 0;
+  function paintAurora() {
+    ax.globalCompositeOperation = "source-over"; ax.globalAlpha = 1;
+    ax.clearRect(0, 0, AW, AH);
+    ax.globalCompositeOperation = "lighter";
+    for (const b of bands) {
+      for (let x = 0; x < AW; x++) {
+        const y = AH * (b.base + b.amp * Math.sin(x * b.f1 + at * b.sp + b.ph) + b.amp * .6 * Math.sin(x * b.f2 - at * b.sp * .7));
+        const k = .55 + .45 * Math.sin(x * .09 + at * 1.3 + b.ph) * Math.sin(x * .023 - at * .6);
+        const hh = AH * b.h * (.6 + .4 * Math.sin(x * .04 + at + b.ph));
+        const edge = Math.min(1, .25 + x / AW * 1.7);   // nhạt dần về phía vách đá bên trái
+        ax.globalAlpha = Math.max(0, k) * .8 * edge;
+        ax.drawImage(b.s, x, y - hh, 1.5, hh);
+      }
+    }
+  }
+  function aurora(now) {
+    requestAnimationFrame(aurora);
+    if (!document.body.classList.contains("has-hero-fg") || scrollY > innerHeight) return;
+    if (now - lastA < 40) return;
+    lastA = now; at += .02;
+    paintAurora();
   }
 
   /* ---------- Hiệu ứng khi cuộn ---------- */
@@ -345,17 +454,21 @@
   function onScroll() {
     const y = scrollY, vh = innerHeight;
     navTheme();
+    altitude();
     if (reduce) return;
     if (y < vh * 1.2) {
       mountains.forEach(g => { g.style.transform = `translateY(${y * g.dataset.depth}px)`; });
       $("#heroBg").style.transform = `translateY(${y * .3}px) scale(1.08)`;
       $(".hero-text").style.transform = `translateY(${y * .45}px)`;
       $(".hero-text").style.opacity = Math.max(0, 1 - y / (vh * .6));
+      $("#heroFg").style.transform = `translateY(${y * .12}px)`;
+      au.style.transform = `translateY(${y * .3}px)`;
     }
     const r = mega.parentElement.getBoundingClientRect();
     if (r.bottom > 0 && r.top < vh) {
       const p = (vh - r.top) / (vh + r.height);
       mega.style.transform = `translateX(${(0.5 - p) * (innerWidth < 720 ? 10 : 22)}%)`;
+      $("#megaMoon").style.setProperty("--rise", `${(1 - p) * 70 - 15}%`);
     }
     $$(".g-item").forEach(f => {
       const rr = f.getBoundingClientRect();
@@ -434,6 +547,7 @@
   }
   renderAll();
   sizeStars(); drawStars();
+  if (reduce) paintAurora(); else requestAnimationFrame(aurora);
   addEventListener("scroll", onScroll, { passive: true });
   addEventListener("resize", () => { sizeStars(); moveNav(); moveTabsPill(); updateArrows(); });
   onScroll();

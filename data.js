@@ -17,9 +17,15 @@ const PORTFOLIO = {
   role: { vi: "Sinh viên IT & Chuyển đổi số", en: "IT & Digital Transformation Student" },
 
   // Ảnh nền màn hình đầu (ảnh phong cảnh / ảnh bạn, khổ ngang). Trống = cảnh núi đêm có sẵn.
-  heroImage: "",
+  heroImage: "assets/hero-cliff.webp",
+  // Ảnh tiền cảnh đã tách bầu trời (WebP/PNG trong suốt). Có ảnh này thì phần trời
+  // sẽ là bầu trời đêm navy với cực quang và sao băng (ưu tiên hơn heroImage).
+  heroForeground: "assets/hero-fg.webp",
   // Ảnh chân dung ở phần "Về tôi" (nên là ảnh đã xoá nền, dạng .png). Trống = chữ viết tắt.
-  avatar: "",
+  avatar: "assets/avatar.webp",
+  // Ảnh lớp phủ: hiện mặc định, rê chuột vào thì lộ ảnh chân dung thật ở dưới.
+  // Nên cùng khung hình với ảnh chân dung. Trống = chỉ hiện ảnh chân dung.
+  avatarAlt: "assets/avatar-topo.webp",
   // Ảnh nhỏ ở khung "Tìm tôi tại" (ảnh lúc đi sự kiện, thuyết trình...).
   contactPhoto: "",
 
@@ -108,7 +114,7 @@ const PORTFOLIO = {
 
   /* ---------- Ảnh hoạt động (hiện rải rác, nghiêng nghiêng) ---------- */
   // Thêm đường dẫn ảnh, vd: ["assets/g1.jpg", "assets/g2.jpg"]. Trống = ẩn phần này.
-  gallery: [],
+  gallery: ["assets/trip-castle.webp", "assets/trip-lake.webp", "assets/trip-sunset.webp"],
 
   /* ---------- Liên hệ ---------- */
   contact: {

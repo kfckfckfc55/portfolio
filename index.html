@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Portfolio</title>
-  <meta name="theme-color" content="#020617">
+  <meta name="theme-color" content="#050b1f">
+  <link rel="icon" type="image/svg+xml" href="assets/shiba.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -16,7 +17,32 @@
   <!-- ========== Thanh điều hướng ========== -->
   <nav class="nav" id="nav" aria-label="Menu">
     <span class="nav-pill" id="navPill" aria-hidden="true"></span>
-    <span class="nav-buddy" id="navBuddy" aria-hidden="true"><i></i><i></i></span>
+    <span class="nav-buddy" id="navBuddy" aria-hidden="true"><svg viewBox="0 0 64 64">  <!-- tai -->
+  <path fill="#17171c" d="M8 33 L12.5 6.5 Q14 3.5 16.8 5.4 L30 17 Z"/>
+  <path fill="#17171c" d="M56 33 L51.5 6.5 Q50 3.5 47.2 5.4 L34 17 Z"/>
+  <path fill="#e8c39a" d="M13 25 L15.2 11 L24.5 18.6 Z"/>
+  <path fill="#e8c39a" d="M51 25 L48.8 11 L39.5 18.6 Z"/>
+  <!-- đầu -->
+  <ellipse cx="32" cy="37" rx="24.5" ry="21" fill="#17171c"/>
+  <!-- viền nâu vàng + má kem (urajiro) -->
+  <path fill="#c98a4b" d="M11.5 38.5 Q13 55.5 32 59.5 Q51 55.5 52.5 38.5 Q46 45 39.5 42.5 Q36 38.5 32 38.5 Q28 38.5 24.5 42.5 Q18 45 11.5 38.5 Z"/>
+  <path fill="#f6ead9" d="M13.5 41 Q16 55 32 58 Q48 55 50.5 41 Q45 46.5 39 44.6 Q35.8 41 32 41 Q28.2 41 25 44.6 Q19 46.5 13.5 41 Z"/>
+  <!-- chấm lông mày -->
+  <ellipse cx="22.5" cy="27.5" rx="3.4" ry="2.3" fill="#d99a5b"/>
+  <ellipse cx="41.5" cy="27.5" rx="3.4" ry="2.3" fill="#d99a5b"/>
+  <!-- mắt -->
+  <g class="eyes">
+    <ellipse cx="23" cy="34.2" rx="3.3" ry="3.5" fill="#050507" stroke="#3a2a1f" stroke-width="1"/>
+    <ellipse cx="41" cy="34.2" rx="3.3" ry="3.5" fill="#050507" stroke="#3a2a1f" stroke-width="1"/>
+    <circle cx="24.3" cy="32.9" r="1.25" fill="#fff"/>
+    <circle cx="42.3" cy="32.9" r="1.25" fill="#fff"/>
+  </g>
+  <!-- mũi, miệng, lưỡi -->
+  <path fill="#ff8fa3" d="M29.6 51.2 Q32 57.2 34.4 51.2 Z"/>
+  <ellipse cx="32" cy="45.6" rx="4.2" ry="2.9" fill="#0b0b0e"/>
+  <ellipse cx="30.9" cy="44.7" rx="1.2" ry=".7" fill="#fff" opacity=".55"/>
+  <path d="M32 48.3 V50.4 M27.4 50.6 Q29.8 53.3 32 50.4 Q34.2 53.3 36.6 50.6" fill="none" stroke="#0b0b0e" stroke-width="1.4" stroke-linecap="round"/>
+</svg></span>
     <a href="#home" class="nav-link" data-sec="home" data-t="nav.home"></a>
     <a href="#about" class="nav-link" data-sec="about" data-t="nav.about"></a>
     <a href="#portfolio" class="nav-link" data-sec="portfolio" data-t="nav.portfolio"></a>
@@ -24,10 +50,19 @@
     <button class="lang" id="lang" type="button" aria-label="VI / EN">EN</button>
   </nav>
 
+  <!-- Thước đo độ cao -->
+  <div class="alt" id="alt" aria-hidden="true">
+    <span class="alt-val" id="altVal">0 m</span>
+    <span class="alt-scale"><span class="alt-track"></span></span>
+    <span class="alt-col"><span class="alt-dot" id="altDot"></span></span>
+    <span class="alt-lbl" data-t="alt"></span>
+  </div>
+
   <main>
     <!-- ========== 1. HERO ========== -->
     <section class="hero" id="home">
       <div class="hero-bg" id="heroBg"></div>
+      <canvas class="hero-aurora" id="aurora" aria-hidden="true"></canvas>
       <canvas class="hero-stars" id="stars" aria-hidden="true"></canvas>
       <svg class="hero-mountains" id="heroMountains" viewBox="0 0 1440 420" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
         <defs>
@@ -39,6 +74,8 @@
         <g data-depth="0.2"><path fill="url(#g2)" d="M0 310 L130 255 L250 295 L390 225 L520 290 L650 240 L790 305 L910 250 L1050 300 L1190 235 L1330 290 L1440 260 V420 H0Z"/></g>
         <g data-depth="0.32"><path fill="url(#g3)" d="M0 360 Q180 315 360 352 T720 345 T1080 355 T1440 335 V420 H0Z"/></g>
       </svg>
+      <div class="hero-mist" aria-hidden="true"></div>
+      <img class="hero-fg" id="heroFg" alt="" aria-hidden="true">
       <div class="hero-shade"></div>
       <div class="hero-text">
         <p class="hero-hello reveal" data-t="hero.hello"></p>
@@ -51,6 +88,7 @@
     <!-- ========== 2. VỀ TÔI ========== -->
     <section class="about topo-dark" id="about">
       <div class="wrap">
+        <p class="kicker reveal" data-t="k.about"></p>
         <h2 class="title-xl reveal" data-t="about.title"></h2>
 
         <div class="intro">
@@ -64,6 +102,7 @@
           </div>
           <div class="intro-b reveal">
             <div class="portrait" id="portrait"></div>
+            <p class="portrait-hint" id="portraitHint" hidden><i></i><span data-t="hint"></span></p>
           </div>
           <div class="intro-c reveal">
             <p class="intro-text" data-f="about"></p>
@@ -91,6 +130,7 @@
 
     <!-- ========== 3. CHỮ LỚN ========== -->
     <section class="mega topo-dark" aria-hidden="true">
+      <span class="mega-moon" id="megaMoon"></span>
       <p class="mega-text" id="megaText">PORTFOLIO</p>
       <span class="mega-arrow">↘</span>
     </section>
@@ -98,6 +138,7 @@
     <!-- ========== 4. PORTFOLIO ========== -->
     <section class="works topo-light" id="portfolio">
       <div class="wrap">
+        <p class="kicker dark reveal" data-t="k.pf"></p>
         <h2 class="title-xl dark reveal" data-t="pf.title"></h2>
         <div class="tabs reveal" id="tabs" role="tablist">
           <span class="tabs-pill" id="tabsPill"></span>
@@ -116,12 +157,18 @@
 
     <!-- ========== 5. ẢNH HOẠT ĐỘNG ========== -->
     <section class="gallery topo-light" id="gallery" hidden>
+      <div class="gallery-title reveal">
+        <p class="kicker dark" data-t="k.gal"></p>
+        <h2 data-t="gal.title"></h2>
+        <p data-t="gal.sub"></p>
+      </div>
       <div class="gallery-stage" id="galleryStage"></div>
     </section>
 
     <!-- ========== 6. LIÊN HỆ ========== -->
     <section class="contact topo-light" id="contact">
       <div class="wrap">
+        <p class="kicker dark reveal" data-t="k.ct"></p>
         <h2 class="title-xl dark reveal" data-t="ct.title"></h2>
         <div class="contact-grid">
           <form class="panel form reveal" id="form">
