@@ -3,365 +3,166 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nguyễn Bá Cường | Portfolio</title>
-  <meta name="description" content="Portfolio của Nguyễn Bá Cường – sinh viên Công nghệ thông tin & Chuyển đổi số, Đại học Kinh tế Quốc dân (NEU).">
-  <meta name="theme-color" content="#030a1c">
+  <title>Portfolio</title>
+  <meta name="theme-color" content="#020617">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <!-- Mọi nội dung được lấy từ data.js – không cần sửa file này -->
 
-  <!-- ===== Thanh điều hướng dạng viên thuốc nổi ===== -->
-  <nav class="pill-nav" id="pillNav" aria-label="Điều hướng chính">
-    <span class="pill-indicator" id="pillIndicator" aria-hidden="true"></span>
-    <a href="#home" class="pill-link active" data-target="home" data-i18n="nav.home">Trang chủ</a>
-    <a href="#about" class="pill-link" data-target="about" data-i18n="nav.about">Về tôi</a>
-    <a href="#portfolio" class="pill-link" data-target="portfolio" data-i18n="nav.portfolio">Dự án</a>
-    <a href="#contact" class="pill-link" data-target="contact" data-i18n="nav.contact">Liên hệ</a>
-    <button class="lang-btn" id="langBtn" type="button" aria-label="Chuyển ngôn ngữ / Switch language">EN</button>
+  <!-- ========== Thanh điều hướng ========== -->
+  <nav class="nav" id="nav" aria-label="Menu">
+    <span class="nav-pill" id="navPill" aria-hidden="true"></span>
+    <span class="nav-buddy" id="navBuddy" aria-hidden="true"><i></i><i></i></span>
+    <a href="#home" class="nav-link" data-sec="home" data-t="nav.home"></a>
+    <a href="#about" class="nav-link" data-sec="about" data-t="nav.about"></a>
+    <a href="#portfolio" class="nav-link" data-sec="portfolio" data-t="nav.portfolio"></a>
+    <a href="#contact" class="nav-link" data-sec="contact" data-t="nav.contact"></a>
+    <button class="lang" id="lang" type="button" aria-label="VI / EN">EN</button>
   </nav>
 
   <main>
-    <!-- ===== HERO: khung cảnh núi đêm ===== -->
+    <!-- ========== 1. HERO ========== -->
     <section class="hero" id="home">
-      <canvas class="stars" id="stars" aria-hidden="true"></canvas>
-      <div class="moon" aria-hidden="true"></div>
-
-      <svg class="mountains" viewBox="0 0 1440 420" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+      <div class="hero-bg" id="heroBg"></div>
+      <canvas class="hero-stars" id="stars" aria-hidden="true"></canvas>
+      <svg class="hero-mountains" id="heroMountains" viewBox="0 0 1440 420" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
         <defs>
-          <linearGradient id="mFar" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="#2a4a86"/><stop offset="1" stop-color="#0d1f45"/>
-          </linearGradient>
-          <linearGradient id="mMid" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="#16316a"/><stop offset="1" stop-color="#081631"/>
-          </linearGradient>
-          <linearGradient id="mNear" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0" stop-color="#0a1835"/><stop offset="1" stop-color="#030a1c"/>
-          </linearGradient>
+          <linearGradient id="g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3b5998"/><stop offset="1" stop-color="#14254d"/></linearGradient>
+          <linearGradient id="g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1b2f5e"/><stop offset="1" stop-color="#0a1530"/></linearGradient>
+          <linearGradient id="g3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0c1a38"/><stop offset="1" stop-color="#020617"/></linearGradient>
         </defs>
-        <g class="layer" data-depth="0.12">
-          <path fill="url(#mFar)" d="M0 270 L110 215 L200 250 L330 160 L450 230 L560 180 L720 70 L850 175 L960 135 L1080 215 L1200 125 L1320 205 L1440 165 V420 H0Z"/>
-          <path fill="#dbe6ff" opacity=".85" d="M720 70 L768 112 L748 108 L732 122 L716 104 L694 116 L680 98Z"/>
-          <path fill="#dbe6ff" opacity=".6" d="M1200 125 L1232 152 L1214 148 L1200 160 L1186 146 L1172 150Z"/>
-          <path fill="#dbe6ff" opacity=".55" d="M330 160 L360 186 L344 182 L330 194 L318 182 L304 186Z"/>
-        </g>
-        <g class="layer" data-depth="0.22">
-          <path fill="url(#mMid)" d="M0 310 L130 255 L250 295 L390 225 L520 290 L650 240 L790 305 L910 250 L1050 300 L1190 235 L1330 290 L1440 260 V420 H0Z"/>
-        </g>
-        <g class="layer" data-depth="0.34">
-          <path fill="url(#mNear)" d="M0 360 Q180 315 360 352 T720 345 T1080 355 T1440 335 V420 H0Z"/>
-        </g>
+        <g data-depth="0.1"><path fill="url(#g1)" d="M0 270 L110 215 L200 250 L330 160 L450 230 L560 180 L720 60 L850 175 L960 135 L1080 215 L1200 125 L1320 205 L1440 165 V420 H0Z"/><path fill="#e6eeff" d="M720 60 L772 106 L750 101 L734 116 L716 98 L692 110 L676 96Z"/></g>
+        <g data-depth="0.2"><path fill="url(#g2)" d="M0 310 L130 255 L250 295 L390 225 L520 290 L650 240 L790 305 L910 250 L1050 300 L1190 235 L1330 290 L1440 260 V420 H0Z"/></g>
+        <g data-depth="0.32"><path fill="url(#g3)" d="M0 360 Q180 315 360 352 T720 345 T1080 355 T1440 335 V420 H0Z"/></g>
       </svg>
-      <div class="hero-fog" aria-hidden="true"></div>
-
-      <div class="hero-content">
-        <p class="hero-kicker reveal" data-i18n="hero.kicker">Portfolio · IT &amp; Chuyển đổi số</p>
-        <h1 class="hero-name reveal">Nguyễn Bá Cường</h1>
-        <p class="hero-sub reveal" data-i18n="hero.sub">Kết nối công nghệ, dữ liệu và giáo dục để tạo ra những giải pháp số hữu ích.</p>
+      <div class="hero-shade"></div>
+      <div class="hero-text">
+        <p class="hero-hello reveal" data-t="hero.hello"></p>
+        <h1 class="hero-name reveal" data-f="name"></h1>
+        <p class="hero-role reveal" data-f="role"></p>
       </div>
-
-      <a href="#about" class="scroll-cue" aria-label="Cuộn xuống">
-        <span></span>
-      </a>
+      <a class="hero-scroll" href="#about" aria-label="Scroll"><span></span></a>
     </section>
 
-    <!-- ===== VỀ TÔI (nền tối, đường đồng mức) ===== -->
-    <section class="dark topo" id="about">
-      <div class="container">
-        <h2 class="big-title reveal" data-i18n="about.title">Về tôi</h2>
+    <!-- ========== 2. VỀ TÔI ========== -->
+    <section class="about topo-dark" id="about">
+      <div class="wrap">
+        <h2 class="title-xl reveal" data-t="about.title"></h2>
 
         <div class="intro">
-          <div class="intro-left reveal">
-            <p class="intro-hi" data-i18n="about.hi">Xin chào, tôi là</p>
-            <h3 class="intro-name">Nguyễn <br>Bá Cường</h3>
-            <a class="btn btn-blue" href="https://www.linkedin.com/in/cuongngba-work" target="_blank" rel="noopener">
-              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13ZM7.12 20.45H3.56V9h3.56v11.45Z"/></svg>
-              <span data-i18n="about.linkedin">Hồ sơ LinkedIn</span>
+          <div class="intro-a reveal">
+            <p class="intro-hi" data-t="about.hi"></p>
+            <h3 class="intro-name" data-f="name"></h3>
+            <a class="btn" id="cvBtn" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h5"/></svg>
+              <span data-t="btn.cv"></span>
             </a>
           </div>
-
-          <div class="intro-photo reveal">
-            <div class="photo-frame">
-              <!-- Thêm ảnh của bạn: đặt file vào assets/avatar.jpg -->
-              <span class="photo-initials">NBC</span>
-              <img src="assets/avatar.jpg" alt="Ảnh Nguyễn Bá Cường" onerror="this.remove()">
-            </div>
+          <div class="intro-b reveal">
+            <div class="portrait" id="portrait"></div>
           </div>
-
-          <div class="intro-right reveal">
-            <p data-i18n="about.text">Là sinh viên ngành Công nghệ thông tin &amp; Chuyển đổi số tại Đại học Kinh tế Quốc dân, tôi quan tâm đến cách công nghệ thay đổi việc dạy và học. Tôi có nền tảng về phân tích dữ liệu, nghiên cứu định lượng và luôn thích làm việc nhóm để biến ý tưởng thành sản phẩm thực tế.</p>
-            <a class="btn btn-blue" href="#portfolio">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 18 6-6-6-6M8 6l-6 6 6 6"/></svg>
-              <span data-i18n="about.viewProjects">Xem dự án</span>
+          <div class="intro-c reveal">
+            <p class="intro-text" data-f="about"></p>
+            <a class="btn" href="#portfolio">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 18 6-6-6-6M8 6l-6 6 6 6"/></svg>
+              <span data-t="btn.projects"></span>
             </a>
           </div>
         </div>
 
-        <!-- Học vấn & Hoạt động -->
-        <div class="timelines">
-          <div class="timeline reveal">
-            <h3 data-i18n="tl.edu">Học vấn</h3>
-            <ol>
-              <li class="current">
-                <span class="tl-dot">1</span>
-                <div class="tl-body">
-                  <div class="tl-head">
-                    <span class="tl-logo">NEU</span>
-                    <span class="tl-org" data-i18n="tl.neu">Đại học Kinh tế Quốc dân</span>
-                    <span class="tl-time" data-i18n="tl.now">Hiện tại</span>
-                  </div>
-                  <p class="tl-role" data-i18n="tl.major">Công nghệ thông tin &amp; Chuyển đổi số</p>
-                  <p class="tl-meta"><span data-i18n="tl.school">Hà Nội</span> <span class="tag" data-i18n="tl.ug">Đại học</span></p>
-                </div>
-              </li>
-            </ol>
+        <div class="journey">
+          <div class="journey-col reveal">
+            <h3 data-t="about.edu"></h3>
+            <ol class="steps" id="eduList"></ol>
           </div>
-
-          <div class="timeline reveal">
-            <h3 data-i18n="tl.exp">Hoạt động</h3>
-            <ol>
-              <li class="current">
-                <span class="tl-dot">1</span>
-                <div class="tl-body">
-                  <div class="tl-head">
-                    <span class="tl-logo">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10 12 5 2 10l10 5 10-5Z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></svg>
-                    </span>
-                    <span class="tl-org">NEU</span>
-                    <span class="tl-time" data-i18n="tl.now">Hiện tại</span>
-                  </div>
-                  <p class="tl-role" data-i18n="tl.edtech">Dự án EdTech tại NEU</p>
-                  <p class="tl-meta"><span data-i18n="tl.edtechMeta">Công nghệ giáo dục</span> <span class="tag" data-i18n="tl.project">Dự án</span></p>
-                </div>
-              </li>
-            </ol>
+          <div class="journey-col reveal">
+            <h3 data-t="about.exp"></h3>
+            <ol class="steps" id="expList"></ol>
           </div>
         </div>
 
-        <!-- Thẻ thư mục thống kê -->
-        <div class="folders">
-          <button class="folder reveal" type="button" data-open-tab="projects">
-            <span class="folder-back"></span>
-            <span class="folder-paper p1"></span>
-            <span class="folder-paper p2"></span>
-            <span class="folder-front">
-              <span class="folder-count" data-count="projects">0</span>
-              <span class="folder-label" data-i18n="tab.projects">Dự án</span>
-              <span class="folder-dots" aria-hidden="true">•••</span>
-            </span>
-          </button>
-          <button class="folder reveal" type="button" data-open-tab="skills">
-            <span class="folder-back"></span>
-            <span class="folder-paper p1"></span>
-            <span class="folder-paper p2"></span>
-            <span class="folder-front">
-              <span class="folder-count" data-count="skills">0</span>
-              <span class="folder-label" data-i18n="tab.skills">Kỹ năng</span>
-              <span class="folder-dots" aria-hidden="true">•••</span>
-            </span>
-          </button>
-          <button class="folder reveal" type="button" data-open-tab="certs">
-            <span class="folder-back"></span>
-            <span class="folder-paper p1"></span>
-            <span class="folder-paper p2"></span>
-            <span class="folder-front">
-              <span class="folder-count" data-count="certs">0</span>
-              <span class="folder-label" data-i18n="tab.certs">Chứng chỉ</span>
-              <span class="folder-dots" aria-hidden="true">•••</span>
-            </span>
-          </button>
-        </div>
+        <div class="folders" id="folders"></div>
       </div>
     </section>
 
-    <!-- ===== Chữ PORTFOLIO lớn (chuyển tối → sáng) ===== -->
-    <section class="mega" aria-hidden="true">
-      <p class="mega-word" id="megaWord">PORTFOLIO</p>
+    <!-- ========== 3. CHỮ LỚN ========== -->
+    <section class="mega topo-dark" aria-hidden="true">
+      <p class="mega-text" id="megaText">PORTFOLIO</p>
+      <span class="mega-arrow">↘</span>
     </section>
 
-    <!-- ===== DỰ ÁN / KỸ NĂNG / CHỨNG CHỈ (nền sáng) ===== -->
-    <section class="light topo" id="portfolio">
-      <div class="container">
-        <h2 class="big-title dark-text reveal" data-i18n="pf.title">Portfolio</h2>
-
-        <div class="tabs reveal" role="tablist">
-          <span class="tab-indicator" id="tabIndicator" aria-hidden="true"></span>
-          <button class="tab active" role="tab" aria-selected="true" data-tab="projects">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m16 18 6-6-6-6M8 6l-6 6 6 6"/></svg>
-            <span data-i18n="tab.projects">Dự án</span>
-          </button>
-          <button class="tab" role="tab" aria-selected="false" data-tab="skills">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 2 7l10 5 10-5-10-5Z"/><path d="m2 17 10 5 10-5M2 12l10 5 10-5"/></svg>
-            <span data-i18n="tab.skills">Kỹ năng</span>
-          </button>
-          <button class="tab" role="tab" aria-selected="false" data-tab="certs">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="6"/><path d="M15.5 13.5 17 22l-5-3-5 3 1.5-8.5"/></svg>
-            <span data-i18n="tab.certs">Chứng chỉ</span>
-          </button>
+    <!-- ========== 4. PORTFOLIO ========== -->
+    <section class="works topo-light" id="portfolio">
+      <div class="wrap">
+        <h2 class="title-xl dark reveal" data-t="pf.title"></h2>
+        <div class="tabs reveal" id="tabs" role="tablist">
+          <span class="tabs-pill" id="tabsPill"></span>
         </div>
-
-        <!-- Tab: Dự án -->
-        <div class="panel active" id="panel-projects" role="tabpanel">
-          <div class="project-grid">
-            <article class="project-card reveal" data-project>
-              <div class="project-cover cover-edtech" aria-hidden="true">
-                <div class="mock-window">
-                  <span class="mw-bar"><i></i><i></i><i></i></span>
-                  <span class="mw-hero"></span>
-                  <span class="mw-row"><b></b><b></b><b></b></span>
-                </div>
-                <svg class="cover-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10 12 5 2 10l10 5 10-5Z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></svg>
-              </div>
-              <div class="project-body">
-                <h3 data-i18n="p1.title">Dự án EdTech tại NEU</h3>
-                <p data-i18n="p1.desc">Tìm hiểu và đề xuất giải pháp công nghệ giáo dục cho sinh viên Đại học Kinh tế Quốc dân, nhằm nâng cao trải nghiệm học tập trong môi trường số.</p>
-                <ul class="chips">
-                  <li>EdTech</li>
-                  <li data-i18n="chip.research">Nghiên cứu</li>
-                  <li data-i18n="chip.dt">Chuyển đổi số</li>
-                </ul>
-                <div class="project-actions">
-                  <button class="btn btn-blue btn-sm" type="button" data-details="p1">
-                    <span data-i18n="btn.details">Chi tiết</span>
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-                  </button>
-                </div>
-              </div>
-            </article>
-
-            <article class="project-card soon reveal">
-              <div class="project-cover cover-soon" aria-hidden="true">
-                <svg class="cover-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
-              </div>
-              <div class="project-body">
-                <h3 data-i18n="pn.title">Dự án tiếp theo</h3>
-                <p data-i18n="pn.desc">Đang được cập nhật…</p>
-              </div>
-            </article>
-          </div>
-        </div>
-
-        <!-- Tab: Kỹ năng -->
-        <div class="panel" id="panel-skills" role="tabpanel" hidden>
-          <div class="skill-groups">
-            <div class="skill-box reveal">
-              <h3 data-i18n="sk.g1">Phân tích &amp; Nghiên cứu</h3>
-              <ul class="skill-list">
-                <li data-skill><span class="sk-ico">PLS</span>SmartPLS 4</li>
-                <li data-skill><span class="sk-ico">SEM</span>PLS-SEM</li>
-                <li data-skill><span class="sk-ico">SP</span>SPSS</li>
-                <li data-skill><span class="sk-ico">Σ</span><span data-i18n="sk.quant">Nghiên cứu định lượng</span></li>
-              </ul>
-            </div>
-            <div class="skill-box reveal">
-              <h3 data-i18n="sk.g2">Công cụ</h3>
-              <ul class="skill-list">
-                <li data-skill><span class="sk-ico xl">X</span>Microsoft Excel</li>
-                <li data-skill><span class="sk-ico pp">P</span>PowerPoint</li>
-                <li data-skill><span class="sk-ico wd">W</span>Word</li>
-                <li data-skill><span class="sk-ico">&lt;/&gt;</span>HTML / CSS</li>
-              </ul>
-            </div>
-            <div class="skill-box reveal">
-              <h3 data-i18n="sk.g3">Kỹ năng mềm</h3>
-              <ul class="skill-list">
-                <li data-skill><span class="sk-ico">🎤</span><span data-i18n="sk.s1">Thuyết trình</span></li>
-                <li data-skill><span class="sk-ico">🤝</span><span data-i18n="sk.s2">Làm việc nhóm</span></li>
-                <li data-skill><span class="sk-ico">💡</span><span data-i18n="sk.s3">Giải quyết vấn đề</span></li>
-                <li data-skill><span class="sk-ico">⏱</span><span data-i18n="sk.s4">Quản lý thời gian</span></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-
-        <!-- Tab: Chứng chỉ (thêm <article data-cert> khi có) -->
-        <div class="panel" id="panel-certs" role="tabpanel" hidden>
-          <div class="empty reveal">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="6"/><path d="M15.5 13.5 17 22l-5-3-5 3 1.5-8.5"/></svg>
-            <p data-i18n="certs.empty">Chứng chỉ sẽ sớm được cập nhật.</p>
-          </div>
-        </div>
+      </div>
+      <div class="carousel reveal">
+        <button class="car-btn prev" id="prev" type="button" aria-label="Trước">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+        </button>
+        <div class="track" id="track"></div>
+        <button class="car-btn next" id="next" type="button" aria-label="Sau">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+        </button>
       </div>
     </section>
 
-    <!-- ===== LIÊN HỆ ===== -->
-    <section class="light topo" id="contact">
-      <div class="container">
-        <h2 class="big-title dark-text reveal" data-i18n="ct.title">Liên hệ</h2>
+    <!-- ========== 5. ẢNH HOẠT ĐỘNG ========== -->
+    <section class="gallery topo-light" id="gallery" hidden>
+      <div class="gallery-stage" id="galleryStage"></div>
+    </section>
 
+    <!-- ========== 6. LIÊN HỆ ========== -->
+    <section class="contact topo-light" id="contact">
+      <div class="wrap">
+        <h2 class="title-xl dark reveal" data-t="ct.title"></h2>
         <div class="contact-grid">
-          <form class="card contact-form reveal" id="contactForm">
-            <h3 class="card-title-blue" data-i18n="ct.formTitle">Gửi lời nhắn</h3>
-            <p class="muted" data-i18n="ct.formLead">Bạn muốn hợp tác hoặc trao đổi? Hãy để lại lời nhắn nhé!</p>
-
-            <label class="field">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>
-              <input type="text" name="name" required data-i18n-ph="ct.name" placeholder="Tên của bạn">
+          <form class="panel form reveal" id="form">
+            <h3 class="panel-blue" data-t="ct.formTitle"></h3>
+            <p class="panel-lead" data-t="ct.formLead"></p>
+            <label class="inp">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></svg>
+              <input name="n" required data-ph="ct.name">
             </label>
-            <label class="field">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
-              <input type="email" name="email" required data-i18n-ph="ct.email" placeholder="Email của bạn">
+            <label class="inp">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
+              <input name="e" type="email" required data-ph="ct.email">
             </label>
-            <label class="field field-area">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-              <textarea name="message" rows="5" required data-i18n-ph="ct.msg" placeholder="Lời nhắn"></textarea>
+            <label class="inp area">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              <textarea name="m" rows="5" required data-ph="ct.msg"></textarea>
             </label>
-            <button class="btn btn-blue btn-block" type="submit">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
-              <span data-i18n="ct.send">Gửi lời nhắn</span>
+            <button class="btn full" type="submit">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+              <span data-t="ct.send"></span>
             </button>
           </form>
 
-          <div class="card find-me reveal">
-            <h3 data-i18n="ct.find">Tìm tôi tại</h3>
-            <ul>
-              <li>
-                <a href="https://www.linkedin.com/in/cuongngba-work" target="_blank" rel="noopener">
-                  <span class="fm-ico li">
-                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13ZM7.12 20.45H3.56V9h3.56v11.45Z"/></svg>
-                  </span>
-                  <span class="fm-text"><b data-i18n="ct.liTitle">Kết nối</b><small>in/cuongngba-work</small></span>
-                  <svg class="fm-ext" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h6v6M10 14 21 3M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>
-                </a>
-              </li>
-              <li>
-                <a href="mailto:cuongngba.work@gmail.com">
-                  <span class="fm-ico mail">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
-                  </span>
-                  <span class="fm-text"><b>Email</b><small>cuongngba.work@gmail.com</small></span>
-                  <svg class="fm-ext" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h6v6M10 14 21 3M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg>
-                </a>
-              </li>
-            </ul>
-            <div class="find-note">
-              <span class="pulse" aria-hidden="true"></span>
-              <span data-i18n="ct.open">Sẵn sàng cho cơ hội thực tập &amp; dự án mới</span>
-            </div>
+          <div class="panel findme reveal">
+            <h3 data-t="ct.find"></h3>
+            <ul id="socials"></ul>
+            <div class="findme-photo" id="contactPhoto"></div>
           </div>
         </div>
       </div>
-
-      <footer class="footer">
-        <p>© <span id="year"></span> <b>Nguyễn Bá Cường</b>. <span data-i18n="footer">Đã đăng ký bản quyền.</span></p>
-      </footer>
+      <footer class="foot">© <span id="yr"></span> <b data-f="name"></b>. <span data-t="foot"></span></footer>
     </section>
   </main>
 
-  <!-- ===== Hộp chi tiết dự án ===== -->
-  <dialog class="modal" id="projectModal">
-    <button class="modal-close" type="button" aria-label="Đóng" data-close>×</button>
-    <h3 data-i18n="p1.title">Dự án EdTech tại NEU</h3>
-    <p data-i18n="p1.long">Dự án tập trung vào việc tìm hiểu nhu cầu học tập của sinh viên NEU và đề xuất các giải pháp công nghệ giáo dục phù hợp, góp phần thúc đẩy chuyển đổi số trong giảng dạy và học tập.</p>
-    <ul class="modal-list">
-      <li><b data-i18n="m.role">Vai trò:</b> <span data-i18n="m.roleV">Thành viên nhóm dự án</span></li>
-      <li><b data-i18n="m.tools">Công cụ:</b> SmartPLS 4, SPSS, Excel</li>
-      <li><b data-i18n="m.focus">Trọng tâm:</b> <span data-i18n="m.focusV">EdTech, phân tích dữ liệu, chuyển đổi số</span></li>
-    </ul>
+  <!-- Hộp chi tiết -->
+  <dialog class="modal" id="modal">
+    <button class="modal-x" type="button" aria-label="Đóng" data-close>×</button>
+    <div id="modalBody"></div>
   </dialog>
 
+  <script src="data.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
