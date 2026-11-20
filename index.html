@@ -24,6 +24,14 @@
     <button class="lang" id="lang" type="button" aria-label="VI / EN">EN</button>
   </nav>
 
+  <!-- Thước đo độ cao -->
+  <div class="alt" id="alt" aria-hidden="true">
+    <span class="alt-val" id="altVal">0 m</span>
+    <span class="alt-scale"><span class="alt-track"></span></span>
+    <span class="alt-col"><span class="alt-dot" id="altDot"></span></span>
+    <span class="alt-lbl" data-t="alt"></span>
+  </div>
+
   <main>
     <!-- ========== 1. HERO ========== -->
     <section class="hero" id="home">
@@ -51,6 +59,7 @@
     <!-- ========== 2. VỀ TÔI ========== -->
     <section class="about topo-dark" id="about">
       <div class="wrap">
+        <p class="kicker reveal" data-t="k.about"></p>
         <h2 class="title-xl reveal" data-t="about.title"></h2>
 
         <div class="intro">
@@ -64,6 +73,7 @@
           </div>
           <div class="intro-b reveal">
             <div class="portrait" id="portrait"></div>
+            <p class="portrait-hint" id="portraitHint" hidden><i></i><span data-t="hint"></span></p>
           </div>
           <div class="intro-c reveal">
             <p class="intro-text" data-f="about"></p>
@@ -91,6 +101,7 @@
 
     <!-- ========== 3. CHỮ LỚN ========== -->
     <section class="mega topo-dark" aria-hidden="true">
+      <span class="mega-sun" id="megaSun"></span>
       <p class="mega-text" id="megaText">PORTFOLIO</p>
       <span class="mega-arrow">↘</span>
     </section>
@@ -98,6 +109,7 @@
     <!-- ========== 4. PORTFOLIO ========== -->
     <section class="works topo-light" id="portfolio">
       <div class="wrap">
+        <p class="kicker dark reveal" data-t="k.pf"></p>
         <h2 class="title-xl dark reveal" data-t="pf.title"></h2>
         <div class="tabs reveal" id="tabs" role="tablist">
           <span class="tabs-pill" id="tabsPill"></span>
@@ -116,12 +128,18 @@
 
     <!-- ========== 5. ẢNH HOẠT ĐỘNG ========== -->
     <section class="gallery topo-light" id="gallery" hidden>
+      <div class="gallery-title reveal">
+        <p class="kicker dark" data-t="k.gal"></p>
+        <h2 data-t="gal.title"></h2>
+        <p data-t="gal.sub"></p>
+      </div>
       <div class="gallery-stage" id="galleryStage"></div>
     </section>
 
     <!-- ========== 6. LIÊN HỆ ========== -->
     <section class="contact topo-light" id="contact">
       <div class="wrap">
+        <p class="kicker dark reveal" data-t="k.ct"></p>
         <h2 class="title-xl dark reveal" data-t="ct.title"></h2>
         <div class="contact-grid">
           <form class="panel form reveal" id="form">

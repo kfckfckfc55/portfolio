@@ -25,7 +25,10 @@
       "ct.title": "Liên hệ", "ct.formTitle": "Liên hệ", "ct.formLead": "Bạn có điều gì muốn trao đổi? Gửi lời nhắn cho mình nhé!",
       "ct.name": "Tên của bạn", "ct.email": "Email của bạn", "ct.msg": "Lời nhắn", "ct.send": "Gửi lời nhắn",
       "ct.find": "Tìm tôi tại", "ct.linkedin": "Kết nối", "ct.linkedinSub": "trên LinkedIn",
-      "foot": "Đã đăng ký bản quyền.", "tools": "Công cụ / chủ đề"
+      "foot": "Đã đăng ký bản quyền.", "tools": "Công cụ / chủ đề",
+      "alt": "Độ cao", "k.about": "Chặng 01 · Khởi hành", "k.pf": "Chặng 02 · Những gì tôi làm",
+      "k.gal": "Chặng 03 · Trên đường", "gal.title": "Những nơi tôi đã đi qua", "gal.sub": "Mỗi chuyến đi là một góc nhìn mới.",
+      "k.ct": "Đích đến · Kết nối", "hint": "Rê chuột vào ảnh", "hintTouch": "Chạm và kéo trên ảnh"
     },
     en: {
       "nav.home": "Home", "nav.about": "About", "nav.portfolio": "Portfolio", "nav.contact": "Contact",
@@ -38,7 +41,10 @@
       "ct.title": "Contact Me", "ct.formTitle": "Contact", "ct.formLead": "Anything you'd like to discuss? Just send me a message!",
       "ct.name": "Your name", "ct.email": "Your email", "ct.msg": "Your message", "ct.send": "Send message",
       "ct.find": "Find Me", "ct.linkedin": "Let's Connect", "ct.linkedinSub": "on LinkedIn",
-      "foot": "All rights reserved.", "tools": "Tools / topics"
+      "foot": "All rights reserved.", "tools": "Tools / topics",
+      "alt": "Altitude", "k.about": "Stage 01 · Departure", "k.pf": "Stage 02 · What I do",
+      "k.gal": "Stage 03 · On the road", "gal.title": "Places I've been", "gal.sub": "Every trip is a new perspective.",
+      "k.ct": "Summit · Let's connect", "hint": "Hover over the photo", "hintTouch": "Touch & drag the photo"
     }
   };
 
@@ -107,10 +113,20 @@
       document.body.classList.add("has-hero-img");
     }
 
-    // Chân dung
-    $("#portrait").innerHTML = D.avatar
-      ? `<img src="${esc(IMG(D.avatar))}" alt="${esc(L(D.name))}">`
-      : `<span class="portrait-ph">${esc(initials(D.name))}</span>`;
+    // Chân dung: nếu có ảnh lớp phủ (avatarAlt) → rê chuột để lộ ảnh thật bên dưới
+    const pt = $("#portrait"), two = D.avatar && D.avatarAlt;
+    pt.innerHTML = two
+      ? `<span class="portrait-glow"></span>
+         <img class="p-img p-base" src="${esc(IMG(D.avatar))}" alt="${esc(L(D.name))}">
+         <img class="p-img p-top" src="${esc(IMG(D.avatarAlt))}" alt="">
+         <span class="lens-ring"></span>`
+      : D.avatar
+        ? `<img src="${esc(IMG(D.avatar))}" alt="${esc(L(D.name))}">`
+        : `<span class="portrait-ph">${esc(initials(D.name))}</span>`;
+    pt.classList.toggle("dual", !!two);
+    const hint = $("#portraitHint");
+    hint.hidden = !two;
+    if (two) hint.querySelector("span").textContent = t(matchMedia("(hover: none)").matches ? "hintTouch" : "hint");
 
     // Ảnh ở khung liên hệ
     const cp = $("#contactPhoto");
@@ -231,7 +247,8 @@
     if (!imgs.length) { sec.hidden = true; return; }
     sec.hidden = false;
     // vị trí rải rác cố định (lặp lại nếu nhiều ảnh)
-    const spots = [[8, 6, -6], [58, 2, 4], [32, 30, -3], [76, 34, 7], [4, 58, 5], [50, 60, -5], [22, 82, 3], [70, 80, -4]];
+    // vị trí rải quanh tiêu đề ở giữa
+    const spots = [[7, 6, -7], [66, 3, 6], [9, 60, 5], [62, 60, -5], [34, 84, 3], [80, 32, -3], [30, 0, 4], [44, 70, -2]];
     $("#galleryStage").innerHTML = imgs.map((src, i) => {
       const [x, y, r] = spots[i % spots.length];
       const sp = (0.15 + (i % 4) * 0.1).toFixed(2);
@@ -239,7 +256,11 @@
         <img src="${esc(IMG(src))}" alt="" loading="lazy"></figure>`;
     }).join("");
     $("#galleryStage").style.height = `${Math.ceil(imgs.length / spots.length) * 100}%`;
-    $$(".g-item img").forEach(im => im.addEventListener("click", () => openModal({ image: im.getAttribute("src") })));
+    $$(".g-item img").forEach(im => {
+      im.addEventListener("click", () => openModal({ image: im.getAttribute("src") }));
+      const mark = () => im.parentElement.classList.toggle("wide", im.naturalWidth > im.naturalHeight * 1.15);
+      im.complete ? mark() : im.addEventListener("load", mark);
+    });
   }
 
   function renderSocials() {
@@ -339,12 +360,38 @@
     requestAnimationFrame(drawStars);
   }
 
+  /* ---------- Kính lúp trên chân dung ---------- */
+  const portrait = $("#portrait");
+  function lensAt(e) {
+    if (!portrait.classList.contains("dual")) return;
+    const r = portrait.getBoundingClientRect();
+    portrait.style.setProperty("--mx", `${e.clientX - r.left}px`);
+    portrait.style.setProperty("--my", `${e.clientY - r.top}px`);
+    portrait.classList.add("lens-on");
+  }
+  portrait.addEventListener("pointermove", lensAt);
+  portrait.addEventListener("pointerdown", lensAt);
+  ["pointerleave", "pointercancel"].forEach(ev => portrait.addEventListener(ev, () => portrait.classList.remove("lens-on")));
+  portrait.addEventListener("pointerup", e => { if (e.pointerType !== "mouse") portrait.classList.remove("lens-on"); });
+
+  /* ---------- Thước đo độ cao ---------- */
+  const SUMMIT = 1500;
+  const alt = $("#alt"), altVal = $("#altVal"), altDot = $("#altDot");
+  function altitude() {
+    const max = document.documentElement.scrollHeight - innerHeight;
+    const p = max > 0 ? Math.min(1, scrollY / max) : 0;
+    alt.classList.toggle("show", scrollY > innerHeight * .4);
+    altDot.style.bottom = (p * 100) + "%";
+    altVal.textContent = (Math.round(p * SUMMIT / 10) * 10).toLocaleString(lang === "vi" ? "vi-VN" : "en-US") + " m";
+  }
+
   /* ---------- Hiệu ứng khi cuộn ---------- */
   const mountains = $$("#heroMountains g[data-depth]");
   const mega = $("#megaText");
   function onScroll() {
     const y = scrollY, vh = innerHeight;
     navTheme();
+    altitude();
     if (reduce) return;
     if (y < vh * 1.2) {
       mountains.forEach(g => { g.style.transform = `translateY(${y * g.dataset.depth}px)`; });
@@ -356,6 +403,7 @@
     if (r.bottom > 0 && r.top < vh) {
       const p = (vh - r.top) / (vh + r.height);
       mega.style.transform = `translateX(${(0.5 - p) * (innerWidth < 720 ? 10 : 22)}%)`;
+      $("#megaSun").style.setProperty("--rise", `${(1 - p) * 70 - 15}%`);
     }
     $$(".g-item").forEach(f => {
       const rr = f.getBoundingClientRect();
