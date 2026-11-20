@@ -2,7 +2,12 @@
    Portfolio – phần xử lý (không cần sửa). Nội dung nằm trong data.js
    ===================================================================== */
 (() => {
-  const D = typeof PORTFOLIO !== "undefined" ? PORTFOLIO : {};
+  // ?preview=1 → hiển thị bản nháp từ trang admin.html
+  const PREVIEW = /[?&]preview=1/.test(location.search);
+  const getLS = k => { try { return JSON.parse(localStorage.getItem(k)); } catch (e) { return null; } };
+  const D = (PREVIEW && getLS("portfolioDraft")) || (typeof PORTFOLIO !== "undefined" ? PORTFOLIO : {});
+  const PIMG = PREVIEW ? (getLS("portfolioPreviewImgs") || {}) : {};
+  const IMG = p => PIMG[p] || p;
   const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
@@ -98,18 +103,18 @@
 
     // Ảnh hero
     if (D.heroImage) {
-      $("#heroBg").style.backgroundImage = `url("${D.heroImage}")`;
+      $("#heroBg").style.backgroundImage = `url("${IMG(D.heroImage)}")`;
       document.body.classList.add("has-hero-img");
     }
 
     // Chân dung
     $("#portrait").innerHTML = D.avatar
-      ? `<img src="${esc(D.avatar)}" alt="${esc(D.name)}">`
+      ? `<img src="${esc(IMG(D.avatar))}" alt="${esc(L(D.name))}">`
       : `<span class="portrait-ph">${esc(initials(D.name))}</span>`;
 
     // Ảnh ở khung liên hệ
     const cp = $("#contactPhoto");
-    if (D.contactPhoto) cp.innerHTML = `<img src="${esc(D.contactPhoto)}" alt="" loading="lazy">`; else cp.hidden = true;
+    if (D.contactPhoto) cp.innerHTML = `<img src="${esc(IMG(D.contactPhoto))}" alt="" loading="lazy">`; else cp.hidden = true;
   }
 
   function stepHTML(items, icon) {
@@ -118,7 +123,7 @@
         <span class="step-n">${i + 1}</span>
         <div class="step-body">
           <div class="step-head">
-            <span class="step-logo">${it.logo ? `<img src="${esc(it.logo)}" alt="">` : icon}</span>
+            <span class="step-logo">${it.logo ? `<img src="${esc(IMG(it.logo))}" alt="">` : icon}</span>
             <span class="step-org">${esc(L(it.org))}</span>
             ${it.time ? `<span class="step-time">${esc(L(it.time))}</span>` : ""}
           </div>
@@ -148,7 +153,7 @@
       return `
       <button class="folder reveal" type="button" data-go="${k}">
         <span class="f-back"></span>
-        <span class="f-sheet s1">${img ? `<img src="${esc(img)}" alt="" loading="lazy">` : ""}</span>
+        <span class="f-sheet s1">${img ? `<img src="${esc(IMG(img))}" alt="" loading="lazy">` : ""}</span>
         <span class="f-sheet s2"></span>
         <span class="f-front">
           <span class="f-num" data-num="${arr.length}">${arr.length}</span>
@@ -181,7 +186,7 @@
   function cardHTML(it, i) {
     const isProject = tab === "projects";
     const img = it.image
-      ? `<img src="${esc(it.image)}" alt="" loading="lazy">`
+      ? `<img src="${esc(IMG(it.image))}" alt="" loading="lazy">`
       : `<span class="cover-ph">${isProject ? ICON.code : tab === "awards" ? ICON.award : ICON.cert}</span>`;
     const desc = isProject ? L(it.desc) : [L(it.issuer), L(it.time)].filter(Boolean).join(" · ");
     const link = isProject ? it.demo : it.link;
@@ -231,7 +236,7 @@
       const [x, y, r] = spots[i % spots.length];
       const sp = (0.15 + (i % 4) * 0.1).toFixed(2);
       return `<figure class="g-item" style="left:${x}%;top:${y + Math.floor(i / spots.length) * 100}%;--r:${r}deg" data-speed="${sp}">
-        <img src="${esc(src)}" alt="" loading="lazy"></figure>`;
+        <img src="${esc(IMG(src))}" alt="" loading="lazy"></figure>`;
     }).join("");
     $("#galleryStage").style.height = `${Math.ceil(imgs.length / spots.length) * 100}%`;
     $$(".g-item img").forEach(im => im.addEventListener("click", () => openModal({ image: im.getAttribute("src") })));
@@ -262,7 +267,7 @@
     const tags = (it.tags || []).map(x => `<li>${esc(L(x))}</li>`).join("");
     const link = it.demo || it.link;
     body.innerHTML = `
-      ${it.image ? `<img class="m-img" src="${esc(it.image)}" alt="">` : ""}
+      ${it.image ? `<img class="m-img" src="${esc(IMG(it.image))}" alt="">` : ""}
       ${it.title ? `<h3>${esc(L(it.title))}</h3>` : ""}
       ${it.issuer || it.time ? `<p class="m-sub">${esc([L(it.issuer), L(it.time)].filter(Boolean).join(" · "))}</p>` : ""}
       ${it.details || it.desc ? `<p>${esc(L(it.details) || L(it.desc))}</p>` : ""}
@@ -421,6 +426,12 @@
 
   /* ---------- Khởi động ---------- */
   $("#yr").textContent = new Date().getFullYear();
+  if (PREVIEW) {
+    const b = document.createElement("div");
+    b.className = "preview-bar";
+    b.innerHTML = 'Đang xem trước bản nháp · <a href="admin.html">← Quay lại chỉnh sửa</a>';
+    document.body.appendChild(b);
+  }
   renderAll();
   sizeStars(); drawStars();
   addEventListener("scroll", onScroll, { passive: true });

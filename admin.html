@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Chỉnh sửa Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f4f6fa; --card: #fff; --ink: #0f172a; --muted: #64748b; --line: #e2e8f0;
+      --blue: #2563eb; --blue-soft: #eef3ff; --red: #dc2626; --green: #16a34a; --r: 16px;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: "Inter", system-ui, sans-serif; background: var(--bg); color: var(--ink); line-height: 1.5; }
+    button, input, textarea, select { font: inherit; color: inherit; }
+    button { cursor: pointer; border: 0; background: none; }
+    a { color: var(--blue); }
+
+    /* Thanh trên */
+    .top {
+      position: sticky; top: 0; z-index: 50; background: rgba(255,255,255,.9); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+    }
+    .top-in { max-width: 980px; margin: 0 auto; padding: 12px 16px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .brand { font-weight: 800; font-size: 1.05rem; margin-right: auto; display: flex; align-items: center; gap: 10px; }
+    .brand i { width: 30px; height: 30px; border-radius: 9px; background: var(--blue); display: grid; place-items: center; color: #fff; font-style: normal; font-size: .8rem; }
+    .saved { font-size: .78rem; color: var(--muted); }
+
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 9px 15px; border-radius: 10px; font-weight: 600; font-size: .88rem; transition: background .2s, transform .15s; white-space: nowrap; }
+    .btn:active { transform: scale(.97); }
+    .btn svg { width: 17px; height: 17px; }
+    .btn-blue { background: var(--blue); color: #fff; }
+    .btn-blue:hover { background: #1d4ed8; }
+    .btn-soft { background: var(--blue-soft); color: var(--blue); }
+    .btn-soft:hover { background: #dfe8ff; }
+    .btn-line { border: 1px solid var(--line); background: #fff; }
+    .btn-line:hover { background: #f8fafc; }
+    .btn-red { color: var(--red); }
+    .btn-sm { padding: 6px 11px; font-size: .8rem; }
+
+    /* Bố cục */
+    .main { max-width: 980px; margin: 0 auto; padding: 22px 16px 120px; display: grid; grid-template-columns: 190px 1fr; gap: 24px; align-items: start; }
+    .main > * { min-width: 0; }
+    .side { position: sticky; top: 76px; display: flex; flex-direction: column; gap: 2px; }
+    .side a { padding: 9px 12px; border-radius: 10px; text-decoration: none; color: var(--ink); font-weight: 500; font-size: .9rem; display: flex; justify-content: space-between; }
+    .side a:hover { background: #fff; }
+    .side a.on { background: var(--blue); color: #fff; }
+    .side a small { opacity: .7; }
+
+    .intro { background: linear-gradient(135deg, #1e3a8a, #2563eb); color: #fff; border-radius: var(--r); padding: 20px 22px; margin-bottom: 20px; }
+    .intro h1 { font-size: 1.3rem; margin-bottom: 6px; }
+    .intro p { opacity: .9; font-size: .9rem; }
+    .intro ol { margin: 10px 0 0 18px; font-size: .88rem; opacity: .95; }
+
+    .sec { background: var(--card); border-radius: var(--r); padding: 22px; margin-bottom: 20px; box-shadow: 0 1px 2px rgba(15,23,42,.04); scroll-margin-top: 80px; }
+    .sec-h { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 4px; }
+    .sec-h h2 { font-size: 1.15rem; }
+    .sec-d { color: var(--muted); font-size: .85rem; margin-bottom: 16px; }
+
+    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .f { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
+    .f > label { font-size: .82rem; font-weight: 600; color: #334155; }
+    .f > label em { font-style: normal; font-weight: 400; color: var(--muted); }
+    .in, .ta {
+      width: 100%; padding: 10px 12px; border: 1.5px solid var(--line); border-radius: 10px; background: #fff;
+      outline: none; transition: border-color .2s, box-shadow .2s; font-size: .92rem;
+    }
+    .in:focus, .ta:focus { border-color: var(--blue); box-shadow: 0 0 0 3px rgba(37,99,235,.12); }
+    .ta { resize: vertical; min-height: 80px; }
+    .bi { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+    .bi > div { position: relative; }
+    .bi .lang { position: absolute; top: 9px; right: 10px; font-size: .66rem; font-weight: 700; color: #94a3b8; pointer-events: none; }
+    .bi .in, .bi .ta { padding-right: 34px; }
+
+    /* Ảnh */
+    .img { display: flex; gap: 12px; align-items: center; }
+    .thumb { width: 64px; height: 64px; border-radius: 10px; flex-shrink: 0; background: #f1f5f9 center/cover no-repeat; border: 1px dashed #cbd5e1; display: grid; place-items: center; color: #94a3b8; }
+    .thumb.has { border: 0; }
+    .thumb.has svg { display: none; }
+    .thumb svg { width: 22px; height: 22px; }
+    .img-r { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px; }
+    .img-btns { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+    .note { font-size: .76rem; color: var(--muted); }
+    .note.warn { color: #b45309; }
+    .note.ok { color: var(--green); }
+
+    /* Danh sách */
+    .item { border: 1px solid var(--line); border-radius: 14px; padding: 16px; margin-bottom: 12px; background: #fcfdff; }
+    .item-h { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+    .item-h b { flex: 1; font-size: .92rem; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .num { width: 24px; height: 24px; border-radius: 50%; background: var(--blue); color: #fff; font-size: .72rem; font-weight: 700; display: grid; place-items: center; flex-shrink: 0; }
+    .ico { width: 30px; height: 30px; border-radius: 8px; display: grid; place-items: center; color: var(--muted); }
+    .ico:hover { background: #eef2f7; color: var(--ink); }
+    .ico.del:hover { background: #fee2e2; color: var(--red); }
+    .ico:disabled { opacity: .3; pointer-events: none; }
+    .ico svg { width: 16px; height: 16px; }
+    .add { width: 100%; padding: 12px; border: 1.5px dashed #cbd5e1; border-radius: 12px; color: var(--blue); font-weight: 600; font-size: .9rem; }
+    .add:hover { background: var(--blue-soft); border-color: var(--blue); }
+    .gal { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px; margin-bottom: 12px; }
+    .gal .item { margin: 0; padding: 10px; }
+    .gal .thumb { width: 100%; height: auto; aspect-ratio: 3/4; margin-bottom: 8px; }
+
+    /* Hộp thoại */
+    dialog { margin: auto; width: min(560px, calc(100% - 24px)); border: 0; border-radius: 18px; padding: 24px; box-shadow: 0 30px 80px rgba(0,0,0,.3); }
+    dialog::backdrop { background: rgba(15,23,42,.5); }
+    dialog h3 { font-size: 1.15rem; margin-bottom: 8px; }
+    dialog p, dialog li { font-size: .88rem; color: #334155; }
+    dialog ol { margin: 8px 0 14px 18px; }
+    dialog .acts { display: flex; gap: 8px; justify-content: flex-end; margin-top: 16px; flex-wrap: wrap; }
+    .box { background: #f8fafc; border: 1px solid var(--line); border-radius: 10px; padding: 12px; margin: 12px 0; font-size: .84rem; }
+    .box code { background: #e2e8f0; padding: 1px 5px; border-radius: 4px; }
+
+    .toast {
+      position: fixed; left: 50%; bottom: 24px; transform: translate(-50%, 120px); z-index: 99;
+      background: var(--ink); color: #fff; padding: 12px 18px; border-radius: 12px; font-size: .9rem; font-weight: 500;
+      box-shadow: 0 10px 30px rgba(0,0,0,.25); transition: transform .35s cubic-bezier(.2,.8,.2,1); max-width: calc(100% - 32px);
+    }
+    .toast:not(.show) { visibility: hidden; transition: transform .35s, visibility 0s .35s; }
+    .toast.show { transform: translate(-50%, 0); }
+    .toast.err { background: var(--red); }
+    .toast.ok { background: var(--green); }
+
+    @media (max-width: 760px) {
+      .main { grid-template-columns: 1fr; }
+      .side { position: static; flex-direction: row; overflow-x: auto; gap: 4px; padding-bottom: 4px; }
+      .side a { flex-shrink: 0; }
+      .side a small { display: none; }
+      .grid2, .bi { grid-template-columns: 1fr; }
+      .brand span { display: none; }
+      .btn .lbl { display: none; }
+      .btn { padding: 9px 11px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="top">
+    <div class="top-in">
+      <div class="brand"><i>✎</i><span>Chỉnh sửa Portfolio</span></div>
+      <span class="saved" id="saved"></span>
+      <button class="btn btn-line" id="btnPreview" title="Xem trước">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg>
+        <span class="lbl">Xem trước</span>
+      </button>
+      <button class="btn btn-soft" id="btnDownload" title="Tải data.js">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+        <span class="lbl">Tải data.js</span>
+      </button>
+      <button class="btn btn-blue" id="btnPublish" title="Đăng lên web">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 14.9A7 7 0 1 1 15.7 8h1.8a4.5 4.5 0 0 1 2.5 8.2M12 12v9M8 16l4-4 4 4"/></svg>
+        <span class="lbl">Đăng lên web</span>
+      </button>
+    </div>
+  </header>
+
+  <div class="main">
+    <nav class="side" id="side"></nav>
+    <div>
+      <div class="intro">
+        <h1>Điền thông tin của bạn</h1>
+        <p>Mọi thay đổi được lưu nháp tự động trên trình duyệt này. Bấm <b>Xem trước</b> để xem web trông thế nào.</p>
+        <ol>
+          <li>Ô có 2 cột <b>VI | EN</b>: cột EN có thể bỏ trống, web sẽ dùng tiếng Việt.</li>
+          <li>Để trống ô nào thì phần đó tự ẩn hoặc hiện khung thay thế.</li>
+          <li>Xong thì bấm <b>Đăng lên web</b> (lần đầu cần thiết lập GitHub, chỉ mất 2 phút).</li>
+        </ol>
+      </div>
+      <div id="form"></div>
+      <div class="sec" style="display:flex;gap:10px;flex-wrap:wrap;justify-content:space-between;align-items:center">
+        <span class="note">Muốn bỏ bản nháp và lấy lại nội dung đang chạy trên web?</span>
+        <button class="btn btn-line btn-red btn-sm" id="btnReset">Bỏ bản nháp</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Đăng lên GitHub -->
+  <dialog id="dlgGh">
+    <h3>Đăng lên web qua GitHub</h3>
+    <p>Trang này sẽ lưu thẳng <code>data.js</code> và ảnh vào kho GitHub của bạn. Khoảng 1 phút sau web tự cập nhật.</p>
+    <div class="box">
+      <b>Tạo mã truy cập (token), chỉ cần làm 1 lần:</b>
+      <ol>
+        <li>Mở <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">github.com/settings/personal-access-tokens/new</a></li>
+        <li>Đặt tên tuỳ ý, <b>Expiration</b> chọn thời hạn bạn muốn.</li>
+        <li><b>Repository access</b> → <i>Only select repositories</i> → chọn kho portfolio.</li>
+        <li><b>Permissions → Repository permissions → Contents</b> → <i>Read and write</i>.</li>
+        <li>Bấm <b>Generate token</b>, sao chép mã và dán vào ô dưới.</li>
+      </ol>
+      Mã chỉ được lưu trên trình duyệt này, không gửi đi đâu khác ngoài GitHub.
+    </div>
+    <div class="grid2">
+      <div class="f"><label>Tài khoản GitHub</label><input class="in" id="ghOwner" placeholder="vd: kfckfckfc55"></div>
+      <div class="f"><label>Tên kho (repo)</label><input class="in" id="ghRepo" placeholder="vd: portfolio"></div>
+    </div>
+    <div class="grid2">
+      <div class="f"><label>Nhánh <em>(nhánh đang bật Pages)</em></label><input class="in" id="ghBranch" placeholder="main"></div>
+      <div class="f"><label>Token</label><input class="in" id="ghToken" type="password" placeholder="github_pat_..."></div>
+    </div>
+    <p class="note" id="ghStatus"></p>
+    <div class="acts">
+      <button class="btn btn-line btn-red btn-sm" id="ghForget">Xoá token đã lưu</button>
+      <button class="btn btn-line" data-close>Huỷ</button>
+      <button class="btn btn-blue" id="ghGo">Đăng ngay</button>
+    </div>
+  </dialog>
+
+  <!-- Sau khi tải data.js -->
+  <dialog id="dlgDl">
+    <h3>Đã tải xuống data.js</h3>
+    <p>Cập nhật web thủ công:</p>
+    <ol>
+      <li>Vào kho GitHub → mở file <code>data.js</code> → bấm ✏️ → xoá hết, dán nội dung file vừa tải → <b>Commit changes</b>.<br>
+        <em>(hoặc Add file → Upload files → kéo file data.js vào → Commit)</em></li>
+      <li id="dlImgs"></li>
+    </ol>
+    <div class="acts"><button class="btn btn-blue" data-close>Đã hiểu</button></div>
+  </dialog>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="data.js"></script>
+  <script>
+  (() => {
+    /* ================= Cấu hình các ô nhập ================= */
+    const KEY_DRAFT = "portfolioDraft", KEY_IMGS = "portfolioPreviewImgs", KEY_GH = "portfolioGitHub";
+
+    const SECTIONS = [
+      { id: "general", title: "Thông tin chung", desc: "Tên, giới thiệu và ảnh chính.", fields: [
+        ["name", "Họ và tên", "text"],
+        ["shortName", "Tên ngắn", "text", "vd: Cường"],
+        ["role", "Chức danh / mô tả ngắn", "bi", "Sinh viên IT & Chuyển đổi số"],
+        ["about", "Giới thiệu bản thân (2–3 câu)", "biarea"],
+        ["cvLink", "Link CV", "url", "Link Google Drive / PDF. Trống = ẩn nút Xem CV"],
+        ["heroImage", "Ảnh nền màn hình đầu", "image", "Ảnh ngang, phong cảnh hoặc ảnh bạn. Trống = cảnh núi đêm"],
+        ["avatar", "Ảnh chân dung (phần Về tôi)", "image", "Đẹp nhất là ảnh PNG đã xoá nền, khổ dọc"],
+        ["contactPhoto", "Ảnh ở phần Liên hệ", "image", "Ảnh lúc đi sự kiện, thuyết trình..."]
+      ]},
+      { id: "education", title: "Học vấn", desc: "Mục đầu tiên sẽ được làm nổi bật.", list: true, label: "trường", fields: [
+        ["org", "Tên trường", "bi"], ["time", "Thời gian", "text", "2023 – nay"],
+        ["title", "Ngành / chuyên ban", "bi"], ["place", "Địa điểm", "bi"],
+        ["tag", "Nhãn", "bi", "Đại học / THPT"], ["logo", "Logo", "image", "Ảnh vuông"]
+      ]},
+      { id: "experience", title: "Kinh nghiệm", desc: "CLB, thực tập, tình nguyện, dự án...", list: true, label: "kinh nghiệm", fields: [
+        ["org", "Tổ chức", "bi"], ["time", "Thời gian", "text", "2024"],
+        ["title", "Vai trò", "bi"], ["place", "Địa điểm", "bi"],
+        ["tag", "Loại", "bi", "CLB / Thực tập / Tình nguyện"], ["logo", "Logo", "image", "Ảnh vuông"]
+      ]},
+      { id: "projects", title: "Dự án", list: true, label: "dự án", fields: [
+        ["title", "Tên dự án", "bi"],
+        ["desc", "Mô tả ngắn (hiện trên thẻ)", "biarea"],
+        ["details", "Mô tả chi tiết (hiện khi bấm Chi tiết)", "biarea"],
+        ["tags", "Công cụ / chủ đề", "tags", "Cách nhau bởi dấu phẩy, vd: SmartPLS, SPSS, Excel"],
+        ["demo", "Link demo / bài viết", "url", "Trống = ẩn nút"],
+        ["image", "Ảnh dự án", "image", "Ảnh ngang, tỉ lệ khoảng 2:1"]
+      ]},
+      { id: "certificates", title: "Chứng chỉ", list: true, label: "chứng chỉ", fields: [
+        ["title", "Tên chứng chỉ", "bi"], ["issuer", "Đơn vị cấp", "bi"],
+        ["time", "Năm", "text", "2025"], ["link", "Link xác minh", "url"], ["image", "Ảnh chứng chỉ", "image"]
+      ]},
+      { id: "awards", title: "Giải thưởng", list: true, label: "giải thưởng", fields: [
+        ["title", "Tên giải", "bi"], ["issuer", "Cuộc thi / đơn vị", "bi"],
+        ["time", "Năm", "text", "2025"], ["link", "Link", "url"], ["image", "Ảnh giấy khen", "image"]
+      ]},
+      { id: "gallery", title: "Ảnh hoạt động", desc: "Hiện rải rác, nghiêng nghiêng giữa phần Portfolio và Liên hệ. Không có ảnh = ẩn phần này.", gallery: true },
+      { id: "contact", title: "Liên hệ", desc: "Mục nào để trống sẽ không hiện.", obj: "contact", fields: [
+        ["email", "Email", "text"], ["linkedin", "LinkedIn", "url", "https://www.linkedin.com/in/..."],
+        ["github", "GitHub", "url"], ["facebook", "Facebook", "url"],
+        ["instagram", "Instagram", "url"], ["tiktok", "TikTok", "url"]
+      ]}
+    ];
+
+    /* ================= Dữ liệu ================= */
+    const PUBLISHED = typeof PORTFOLIO !== "undefined" ? PORTFOLIO : {};
+    const clone = o => JSON.parse(JSON.stringify(o));
+    const store = {
+      get(k, d) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch (e) { return d; } },
+      set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); return true; } catch (e) { return false; } },
+      del(k) { try { localStorage.removeItem(k); } catch (e) {} }
+    };
+    let data = store.get(KEY_DRAFT, null) || clone(PUBLISHED);
+    let previewImgs = store.get(KEY_IMGS, {});
+    const pendingUploads = new Set(store.get("portfolioPending", []));
+    ["education", "experience", "projects", "certificates", "awards", "gallery"].forEach(k => { if (!Array.isArray(data[k])) data[k] = []; });
+    if (!data.contact) data.contact = {};
+
+    const $ = s => document.querySelector(s);
+    const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+    const vi = v => (v && typeof v === "object") ? (v.vi ?? "") : (v ?? "");
+    const en = v => (v && typeof v === "object") ? (v.en ?? "") : "";
+
+    let saveTimer;
+    function save() {
+      clearTimeout(saveTimer);
+      $("#saved").textContent = "Đang lưu nháp…";
+      saveTimer = setTimeout(() => {
+        const ok = store.set(KEY_DRAFT, data);
+        store.set("portfolioPending", [...pendingUploads]);
+        $("#saved").textContent = ok ? "✓ Đã lưu nháp" : "⚠ Không lưu nháp được";
+      }, 300);
+    }
+
+    function toast(msg, type = "") {
+      const t = $("#toast");
+      t.textContent = msg; t.className = "toast show " + type;
+      clearTimeout(t._h); t._h = setTimeout(() => t.className = "toast " + type, 3800);
+    }
+
+    /* ================= Icon ================= */
+    const IC = {
+      up: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg>',
+      down: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg>',
+      del: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>',
+      img: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></svg>'
+    };
+
+    /* ================= Tạo ô nhập ================= */
+    function el(html) { const d = document.createElement("div"); d.innerHTML = html.trim(); return d.firstChild; }
+
+    function field(obj, [key, label, type, hint]) {
+      const wrap = el(`<div class="f"><label>${esc(label)}${hint && (type === "image" || type === "url" || type === "tags") ? ` <em>· ${esc(hint)}</em>` : ""}</label></div>`);
+      const ph = hint && !["image", "url", "tags"].includes(type) ? hint : "";
+
+      if (type === "bi" || type === "biarea") {
+        const tag = type === "bi" ? "input" : "textarea";
+        const cls = type === "bi" ? "in" : "ta";
+        const box = el(`<div class="bi">
+          <div><${tag} class="${cls}" data-l="vi" placeholder="${esc(ph)}"></${tag}><span class="lang">VI</span></div>
+          <div><${tag} class="${cls}" data-l="en" placeholder="(tiếng Anh, có thể bỏ trống)"></${tag}><span class="lang">EN</span></div></div>`);
+        const [a, b] = box.querySelectorAll("[data-l]");
+        a.value = vi(obj[key]); b.value = en(obj[key]);
+        const upd = () => { obj[key] = b.value.trim() ? { vi: a.value, en: b.value } : a.value; save(); refreshTitles(); };
+        a.addEventListener("input", upd); b.addEventListener("input", upd);
+        wrap.appendChild(box);
+      } else if (type === "tags") {
+        const i = el(`<input class="in">`);
+        i.value = (obj[key] || []).map(vi).join(", ");
+        i.addEventListener("input", () => { obj[key] = i.value.split(",").map(s => s.trim()).filter(Boolean); save(); });
+        wrap.appendChild(i);
+      } else if (type === "image") {
+        wrap.appendChild(imageField(obj, key));
+      } else {
+        const i = el(`<input class="in" ${type === "url" ? 'type="url" inputmode="url"' : ""} placeholder="${esc(ph)}">`);
+        i.value = obj[key] ?? "";
+        i.addEventListener("input", () => { obj[key] = i.value.trim(); save(); refreshTitles(); });
+        wrap.appendChild(i);
+      }
+      return wrap;
+    }
+
+    function imageField(obj, key, onRemove) {
+      const box = el(`<div class="img">
+        <div class="thumb">${IC.img}</div>
+        <div class="img-r">
+          <input class="in" placeholder="assets/ten-anh.jpg  (hoặc bấm Chọn ảnh)">
+          <div class="img-btns">
+            <label class="btn btn-soft btn-sm">${IC.img} Chọn ảnh<input type="file" accept="image/*" hidden></label>
+            <button class="btn btn-line btn-sm btn-red" type="button" data-rm>Xoá ảnh</button>
+            <span class="note"></span>
+          </div>
+        </div></div>`);
+      const thumb = box.querySelector(".thumb"), inp = box.querySelector(".in"), note = box.querySelector(".note");
+      const show = () => {
+        const p = obj[key] || "";
+        inp.value = p;
+        const src = previewImgs[p] || (p && !/^data:/.test(p) ? p : "");
+        thumb.style.backgroundImage = src ? `url("${src}")` : "";
+        thumb.classList.toggle("has", !!src);
+        if (pendingUploads.has(p)) { note.textContent = "Ảnh mới – sẽ được tải lên khi Đăng"; note.className = "note warn"; }
+        else note.textContent = "";
+      };
+      inp.addEventListener("change", () => { obj[key] = inp.value.trim(); save(); show(); });
+      box.querySelector("[data-rm]").addEventListener("click", () => {
+        pendingUploads.delete(obj[key]); obj[key] = ""; save(); show(); onRemove && onRemove();
+      });
+      box.querySelector("input[type=file]").addEventListener("change", async e => {
+        const file = e.target.files[0]; if (!file) return;
+        note.textContent = "Đang xử lý…"; note.className = "note";
+        try {
+          const path = await addImage(file);
+          obj[key] = path; save(); show();
+        } catch (err) { note.textContent = "Không đọc được ảnh"; note.className = "note warn"; }
+        e.target.value = "";
+      });
+      show();
+      return box;
+    }
+
+    /* Nén ảnh và lưu tạm để xem trước / tải lên */
+    function resize(file, max, q) {
+      return new Promise((res, rej) => {
+        const img = new Image();
+        img.onload = () => {
+          const s = Math.min(1, max / Math.max(img.width, img.height));
+          const c = document.createElement("canvas");
+          c.width = Math.round(img.width * s); c.height = Math.round(img.height * s);
+          const png = /png|webp|gif/.test(file.type);
+          c.getContext("2d").drawImage(img, 0, 0, c.width, c.height);
+          res({ url: c.toDataURL(png ? "image/png" : "image/jpeg", q), ext: png ? "png" : "jpg" });
+          URL.revokeObjectURL(img.src);
+        };
+        img.onerror = rej;
+        img.src = URL.createObjectURL(file);
+      });
+    }
+    const uploadData = {}; // path -> dataURL chất lượng cao (chỉ trong phiên này)
+    async function addImage(file) {
+      const big = await resize(file, 1800, .85);
+      const base = file.name.replace(/\.[^.]+$/, "").normalize("NFD").replace(/[̀-ͯ]/g, "")
+        .replace(/đ/g, "d").replace(/Đ/g, "D").replace(/[^a-zA-Z0-9]+/g, "-").replace(/^-|-$/g, "").toLowerCase().slice(0, 40) || "anh";
+      const path = `assets/${base}-${Date.now().toString(36).slice(-4)}.${big.ext}`;
+      uploadData[path] = big.url;
+      const small = await resize(file, 900, .75);
+      previewImgs[path] = small.url;
+      if (!store.set(KEY_IMGS, previewImgs)) { delete previewImgs[path]; toast("Bộ nhớ trình duyệt đầy – ảnh vẫn dùng được nhưng có thể không hiện khi xem trước"); }
+      pendingUploads.add(path);
+      return path;
+    }
+
+    /* ================= Vẽ form ================= */
+    function itemTitle(sec, it, i) {
+      const t = sec.id === "education" || sec.id === "experience" ? (vi(it.org) || vi(it.title)) : (vi(it.title) || vi(it.org));
+      return t || `${sec.label[0].toUpperCase() + sec.label.slice(1)} ${i + 1}`;
+    }
+    function refreshTitles() {
+      document.querySelectorAll("[data-ititle]").forEach(b => {
+        const [sid, i] = b.dataset.ititle.split(":");
+        const sec = SECTIONS.find(s => s.id === sid);
+        b.textContent = itemTitle(sec, data[sid][+i], +i);
+      });
+      renderSide();
+    }
+
+    /* Ô ngắn (text, link) xếp 2 cột; ô dài chiếm cả hàng */
+    function appendFields(container, obj, fields) {
+      let g = null;
+      fields.forEach(f => {
+        const node = field(obj, f);
+        if (f[2] === "text" || f[2] === "url") {
+          if (!g) { g = el(`<div class="grid2"></div>`); container.appendChild(g); }
+          g.appendChild(node);
+        } else { g = null; container.appendChild(node); }
+      });
+    }
+
+    function renderSection(sec) {
+      const box = document.getElementById("sec-" + sec.id) || el(`<section class="sec" id="sec-${sec.id}"></section>`);
+      box.innerHTML = `<div class="sec-h"><h2>${sec.title}</h2></div>${sec.desc ? `<p class="sec-d">${sec.desc}</p>` : '<div style="height:12px"></div>'}`;
+
+      if (sec.list) {
+        const arr = data[sec.id];
+        arr.forEach((it, i) => {
+          const card = el(`<div class="item"><div class="item-h"><span class="num">${i + 1}</span><b data-ititle="${sec.id}:${i}"></b>
+            <button class="ico" title="Lên" ${i === 0 ? "disabled" : ""} data-a="up">${IC.up}</button>
+            <button class="ico" title="Xuống" ${i === arr.length - 1 ? "disabled" : ""} data-a="down">${IC.down}</button>
+            <button class="ico del" title="Xoá" data-a="del">${IC.del}</button></div></div>`);
+          card.querySelector("b").textContent = itemTitle(sec, it, i);
+          appendFields(card, it, sec.fields);
+          card.querySelectorAll("[data-a]").forEach(b => b.addEventListener("click", () => {
+            const a = b.dataset.a;
+            if (a === "del") { if (!confirm(`Xoá "${itemTitle(sec, it, i)}"?`)) return; arr.splice(i, 1); }
+            if (a === "up") [arr[i - 1], arr[i]] = [arr[i], arr[i - 1]];
+            if (a === "down") [arr[i + 1], arr[i]] = [arr[i], arr[i + 1]];
+            save(); renderSection(sec); renderSide();
+          }));
+          box.appendChild(card);
+        });
+        const add = el(`<button class="add" type="button">+ Thêm ${sec.label}</button>`);
+        add.addEventListener("click", () => {
+          const it = {}; sec.fields.forEach(([k, , t]) => it[k] = t === "tags" ? [] : "");
+          arr.push(it); save(); renderSection(sec); renderSide();
+          box.querySelectorAll(".item")[arr.length - 1].querySelector("input")?.focus();
+        });
+        box.appendChild(add);
+      } else if (sec.gallery) {
+        const arr = data.gallery;
+        const grid = el(`<div class="gal"></div>`);
+        arr.forEach((p, i) => {
+          const holder = { v: p };
+          const card = el(`<div class="item"></div>`);
+          const thumb = el(`<div class="thumb has"></div>`);
+          thumb.style.backgroundImage = `url("${previewImgs[p] || p}")`;
+          const row = el(`<div style="display:flex;justify-content:space-between;align-items:center">
+            <span class="note">${pendingUploads.has(p) ? "Ảnh mới" : "Ảnh " + (i + 1)}</span>
+            <span><button class="ico" data-a="up" ${i === 0 ? "disabled" : ""}>${IC.up}</button><button class="ico del" data-a="del">${IC.del}</button></span></div>`);
+          row.querySelectorAll("[data-a]").forEach(b => b.addEventListener("click", () => {
+            if (b.dataset.a === "del") { pendingUploads.delete(p); arr.splice(i, 1); }
+            else [arr[i - 1], arr[i]] = [arr[i], arr[i - 1]];
+            save(); renderSection(sec); renderSide();
+          }));
+          card.append(thumb, row); grid.appendChild(card);
+        });
+        box.appendChild(grid);
+        const add = el(`<label class="add" style="display:block;text-align:center;cursor:pointer">+ Thêm ảnh (chọn được nhiều ảnh)<input type="file" accept="image/*" multiple hidden></label>`);
+        add.querySelector("input").addEventListener("change", async e => {
+          for (const f of e.target.files) { try { arr.push(await addImage(f)); } catch (err) {} }
+          save(); renderSection(sec); renderSide();
+        });
+        box.appendChild(add);
+      } else {
+        appendFields(box, sec.obj ? data[sec.obj] : data, sec.fields);
+      }
+      return box;
+    }
+
+    function renderSide() {
+      $("#side").innerHTML = SECTIONS.map(s => {
+        const n = s.list || s.gallery ? `<small>${data[s.id].length}</small>` : "";
+        return `<a href="#sec-${s.id}" data-s="${s.id}">${s.title}${n}</a>`;
+      }).join("");
+    }
+
+    function renderAll() {
+      const form = $("#form"); form.innerHTML = "";
+      SECTIONS.forEach(s => form.appendChild(renderSection(s)));
+      renderSide();
+    }
+
+    // Đánh dấu mục đang xem ở menu bên
+    const io = new IntersectionObserver(es => es.forEach(e => {
+      if (!e.isIntersecting) return;
+      document.querySelectorAll("#side a").forEach(a => a.classList.toggle("on", "sec-" + a.dataset.s === e.target.id));
+    }), { rootMargin: "-30% 0px -60% 0px" });
+
+    /* ================= Xuất data.js ================= */
+    function buildDataJs() {
+      return `/* =====================================================================
+   THÔNG TIN PORTFOLIO
+   Cách dễ nhất để sửa: mở trang admin.html trên web của bạn.
+   Có thể sửa trực tiếp file này: chữ 2 ngôn ngữ viết dạng { "vi": "...", "en": "..." }
+   ===================================================================== */
+
+const PORTFOLIO = ${JSON.stringify(data, null, 2)};
+`;
+    }
+
+    $("#btnDownload").addEventListener("click", () => {
+      const blob = new Blob([buildDataJs()], { type: "text/javascript" });
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob); a.download = "data.js"; a.click();
+      setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+      const pend = [...pendingUploads].filter(p => JSON.stringify(data).includes(p));
+      const li = $("#dlImgs");
+      if (pend.length) {
+        li.innerHTML = `Bạn có <b>${pend.length} ảnh mới</b>. Ảnh đã được tải về máy kèm theo – hãy upload chúng vào thư mục <code>assets</code> (giữ nguyên tên file):<br>` +
+          pend.map(p => `<code>${esc(p.replace("assets/", ""))}</code>`).join(" ");
+        pend.forEach(p => {
+          const src = uploadData[p] || previewImgs[p]; if (!src) return;
+          const x = document.createElement("a"); x.href = src; x.download = p.replace("assets/", ""); x.click();
+        });
+      } else li.innerHTML = "Không có ảnh mới cần tải lên.";
+      $("#dlgDl").showModal();
+    });
+
+    /* ================= Xem trước ================= */
+    $("#btnPreview").addEventListener("click", () => {
+      store.set(KEY_DRAFT, data);
+      window.open("index.html?preview=1", "_blank");
+    });
+
+    /* ================= Đăng lên GitHub ================= */
+    const gh = Object.assign({ owner: "", repo: "", branch: "main", token: "" }, store.get(KEY_GH, {}));
+    // Tự đoán tài khoản & repo từ địa chỉ web: ten.github.io/repo
+    const m = location.hostname.match(/^([^.]+)\.github\.io$/i);
+    if (m && !gh.owner) { gh.owner = m[1]; gh.repo = location.pathname.split("/").filter(Boolean)[0] || `${m[1]}.github.io`; if (gh.repo.endsWith(".html")) gh.repo = `${m[1]}.github.io`; }
+
+    $("#btnPublish").addEventListener("click", () => {
+      $("#ghOwner").value = gh.owner; $("#ghRepo").value = gh.repo; $("#ghBranch").value = gh.branch; $("#ghToken").value = gh.token;
+      $("#ghStatus").textContent = ""; $("#dlgGh").showModal();
+    });
+    $("#ghForget").addEventListener("click", () => { gh.token = ""; $("#ghToken").value = ""; store.set(KEY_GH, gh); toast("Đã xoá token"); });
+    document.querySelectorAll("dialog").forEach(d => d.addEventListener("click", e => {
+      if (e.target === d || e.target.hasAttribute("data-close")) d.close();
+    }));
+
+    function b64utf8(str) {
+      const bytes = new TextEncoder().encode(str); let bin = "";
+      for (let i = 0; i < bytes.length; i += 0x8000) bin += String.fromCharCode(...bytes.subarray(i, i + 0x8000));
+      return btoa(bin);
+    }
+    async function api(path, opts = {}) {
+      const r = await fetch(`https://api.github.com/repos/${encodeURIComponent(gh.owner)}/${encodeURIComponent(gh.repo)}/contents/${path}`, {
+        ...opts,
+        headers: { Accept: "application/vnd.github+json", Authorization: `Bearer ${gh.token}`, "X-GitHub-Api-Version": "2022-11-28", ...(opts.headers || {}) }
+      });
+      return r;
+    }
+    async function putFile(path, b64, msg) {
+      let sha;
+      const g = await api(`${path}?ref=${encodeURIComponent(gh.branch)}`);
+      if (g.ok) sha = (await g.json()).sha;
+      else if (g.status === 401) throw new Error("Token không hợp lệ hoặc đã hết hạn.");
+      else if (g.status !== 404) throw new Error(`Không đọc được ${path} (lỗi ${g.status}).`);
+      const r = await api(path, { method: "PUT", body: JSON.stringify({ message: msg, content: b64, branch: gh.branch, ...(sha ? { sha } : {}) }) });
+      if (!r.ok) {
+        const j = await r.json().catch(() => ({}));
+        if (r.status === 404) throw new Error("Không tìm thấy kho hoặc nhánh – kiểm tra lại tên tài khoản, repo, nhánh, và quyền của token.");
+        if (r.status === 403) throw new Error("Token chưa có quyền Contents: Read and write cho kho này.");
+        throw new Error(j.message || `Lỗi ${r.status}`);
+      }
+    }
+
+    $("#ghGo").addEventListener("click", async () => {
+      gh.owner = $("#ghOwner").value.trim(); gh.repo = $("#ghRepo").value.trim();
+      gh.branch = $("#ghBranch").value.trim() || "main"; gh.token = $("#ghToken").value.trim();
+      const st = $("#ghStatus");
+      if (!gh.owner || !gh.repo || !gh.token) { st.textContent = "Hãy điền đủ tài khoản, tên kho và token."; st.className = "note warn"; return; }
+      store.set(KEY_GH, gh);
+      const btn = $("#ghGo"); btn.disabled = true;
+      try {
+        const used = JSON.stringify(data);
+        const imgs = [...pendingUploads].filter(p => used.includes(p));
+        for (const [i, p] of imgs.entries()) {
+          const src = uploadData[p] || previewImgs[p];
+          if (!src) throw new Error(`Ảnh ${p} không còn trong bộ nhớ – hãy chọn lại ảnh đó.`);
+          st.textContent = `Đang tải ảnh ${i + 1}/${imgs.length}…`; st.className = "note";
+          await putFile(p, src.split(",")[1], `Thêm ảnh ${p}`);
+          pendingUploads.delete(p);
+        }
+        st.textContent = "Đang lưu data.js…";
+        await putFile("data.js", b64utf8(buildDataJs()), "Cập nhật thông tin portfolio");
+        save();
+        st.textContent = "✓ Đã đăng! Web sẽ cập nhật sau khoảng 1–2 phút."; st.className = "note ok";
+        toast("Đã đăng lên GitHub! Web cập nhật sau 1–2 phút.", "ok");
+        renderAll();
+      } catch (err) {
+        st.textContent = "⚠ " + (err.message || "Không kết nối được GitHub."); st.className = "note warn";
+      } finally { btn.disabled = false; }
+    });
+
+    /* ================= Bỏ nháp ================= */
+    $("#btnReset").addEventListener("click", () => {
+      if (!confirm("Bỏ toàn bộ bản nháp và lấy lại nội dung đang chạy trên web?")) return;
+      store.del(KEY_DRAFT); store.del(KEY_IMGS); store.del("portfolioPending");
+      data = clone(PUBLISHED); previewImgs = {}; pendingUploads.clear();
+      ["education", "experience", "projects", "certificates", "awards", "gallery"].forEach(k => { if (!Array.isArray(data[k])) data[k] = []; });
+      if (!data.contact) data.contact = {};
+      renderAll(); document.querySelectorAll(".sec").forEach(s => io.observe(s));
+      toast("Đã lấy lại nội dung gốc");
+    });
+
+    renderAll();
+    document.querySelectorAll(".sec").forEach(s => io.observe(s));
+    $("#saved").textContent = store.get(KEY_DRAFT, null) ? "Đang dùng bản nháp" : "";
+  })();
+  </script>
+</body>
+</html>

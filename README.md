@@ -2,9 +2,19 @@
 
 Website portfolio một trang, chạy trên GitHub Pages.
 
-## Sửa thông tin
+## Sửa thông tin – cách dễ nhất
 
-**Chỉ cần sửa file `data.js`.** Không cần đụng tới `index.html`, `style.css`, `script.js`.
+Mở **`admin.html`** trên web của bạn, vd: `https://kfckfckfc55.github.io/portfolio/admin.html`
+
+- Điền form, chọn ảnh từ máy → tự lưu nháp trên trình duyệt.
+- **Xem trước** để xem web với bản nháp.
+- **Đăng lên web**: lưu thẳng lên GitHub (cần token, hướng dẫn ngay trong trang). Hoặc **Tải data.js** rồi upload thủ công.
+
+> Token chỉ lưu trên trình duyệt của bạn. Tạo token loại *fine-grained*, chỉ cho kho này, quyền *Contents: Read and write*. Đừng nhập token trên máy tính dùng chung.
+
+## Sửa thông tin – thủ công
+
+Toàn bộ nội dung nằm trong file `data.js`.
 
 Trên GitHub: mở `data.js` → bấm biểu tượng ✏️ (Edit) → sửa → **Commit changes**. Khoảng 1 phút sau web tự cập nhật.
 
