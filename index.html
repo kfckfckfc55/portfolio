@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nguyễn Bá Cường | Portfolio</title>
+  <meta name="description" content="Portfolio của Nguyễn Bá Cường – sinh viên Công nghệ thông tin & Chuyển đổi số, Đại học Kinh tế Quốc dân (NEU).">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ===== Header / Navigation ===== -->
+  <header class="header" id="header">
+    <nav class="nav container">
+      <a href="#hero" class="logo">NBC<span>.</span></a>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a href="#about" data-i18n="nav.about">Về tôi</a></li>
+        <li><a href="#skills" data-i18n="nav.skills">Kỹ năng</a></li>
+        <li><a href="#projects" data-i18n="nav.projects">Dự án</a></li>
+        <li><a href="#contact" data-i18n="nav.contact">Liên hệ</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button class="lang-btn" id="langBtn" aria-label="Chuyển ngôn ngữ / Switch language">EN</button>
+        <button class="menu-btn" id="menuBtn" aria-label="Mở menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ===== Hero ===== -->
+    <section class="hero" id="hero">
+      <div class="container hero-inner">
+        <div class="hero-text">
+          <p class="eyebrow" data-i18n="hero.hello">Xin chào, tôi là</p>
+          <h1>Nguyễn Bá Cường</h1>
+          <p class="hero-role" data-i18n="hero.role">Sinh viên Công nghệ thông tin &amp; Chuyển đổi số · Đại học Kinh tế Quốc dân (NEU)</p>
+          <p class="hero-desc" data-i18n="hero.desc">Kết nối công nghệ, dữ liệu và giáo dục để tạo ra những giải pháp số hữu ích.</p>
+          <div class="hero-cta">
+            <a href="#projects" class="btn btn-primary" data-i18n="hero.cta1">Xem dự án</a>
+            <a href="#contact" class="btn btn-outline" data-i18n="hero.cta2">Liên hệ</a>
+          </div>
+        </div>
+        <div class="hero-visual" aria-hidden="true">
+          <div class="avatar">NBC</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== About ===== -->
+    <section class="section" id="about">
+      <div class="container">
+        <h2 class="section-title"><span>01</span> <span data-i18n="about.title">Về tôi</span></h2>
+        <div class="about-grid">
+          <div class="about-text">
+            <p data-i18n="about.p1">Tôi là sinh viên ngành Công nghệ thông tin và Chuyển đổi số tại Đại học Kinh tế Quốc dân. Tôi quan tâm đến cách công nghệ thay đổi việc dạy và học, đặc biệt trong lĩnh vực EdTech.</p>
+            <p data-i18n="about.p2">Tôi có nền tảng về phân tích dữ liệu và nghiên cứu định lượng, luôn chủ động học hỏi và thích làm việc nhóm để biến ý tưởng thành sản phẩm thực tế.</p>
+          </div>
+          <ul class="about-facts">
+            <li>
+              <span class="fact-label" data-i18n="about.f1l">Trường</span>
+              <span class="fact-value" data-i18n="about.f1v">Đại học Kinh tế Quốc dân (NEU)</span>
+            </li>
+            <li>
+              <span class="fact-label" data-i18n="about.f2l">Ngành</span>
+              <span class="fact-value" data-i18n="about.f2v">Công nghệ thông tin &amp; Chuyển đổi số</span>
+            </li>
+            <li>
+              <span class="fact-label" data-i18n="about.f3l">Quan tâm</span>
+              <span class="fact-value" data-i18n="about.f3v">EdTech, Phân tích dữ liệu, Chuyển đổi số</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Skills ===== -->
+    <section class="section section-alt" id="skills">
+      <div class="container">
+        <h2 class="section-title"><span>02</span> <span data-i18n="skills.title">Kỹ năng</span></h2>
+        <div class="skills-grid">
+          <div class="skill-group">
+            <h3 data-i18n="skills.g1">Phân tích &amp; Nghiên cứu</h3>
+            <ul class="tags">
+              <li>SmartPLS 4</li>
+              <li>PLS-SEM</li>
+              <li>SPSS</li>
+              <li data-i18n="skills.quant">Nghiên cứu định lượng</li>
+            </ul>
+          </div>
+          <div class="skill-group">
+            <h3 data-i18n="skills.g2">Công cụ</h3>
+            <ul class="tags">
+              <li>Microsoft Excel</li>
+              <li>PowerPoint</li>
+              <li>Word</li>
+              <li>HTML / CSS</li>
+            </ul>
+          </div>
+          <div class="skill-group">
+            <h3 data-i18n="skills.g3">Kỹ năng mềm</h3>
+            <ul class="tags">
+              <li data-i18n="skills.s1">Thuyết trình</li>
+              <li data-i18n="skills.s2">Làm việc nhóm</li>
+              <li data-i18n="skills.s3">Giải quyết vấn đề</li>
+              <li data-i18n="skills.s4">Quản lý thời gian</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Projects ===== -->
+    <section class="section" id="projects">
+      <div class="container">
+        <h2 class="section-title"><span>03</span> <span data-i18n="projects.title">Dự án</span></h2>
+        <div class="projects-grid">
+          <article class="card">
+            <div class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10 12 5 2 10l10 5 10-5Z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></svg>
+            </div>
+            <h3 data-i18n="projects.p1.title">Dự án EdTech tại NEU</h3>
+            <p data-i18n="projects.p1.desc">Tìm hiểu và đề xuất giải pháp công nghệ giáo dục cho sinh viên Đại học Kinh tế Quốc dân, nhằm nâng cao trải nghiệm học tập trong môi trường số.</p>
+            <ul class="card-tags">
+              <li>EdTech</li>
+              <li data-i18n="projects.tag.research">Nghiên cứu</li>
+              <li data-i18n="projects.tag.dt">Chuyển đổi số</li>
+            </ul>
+          </article>
+
+          <article class="card card-placeholder">
+            <div class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+            </div>
+            <h3 data-i18n="projects.next.title">Dự án tiếp theo</h3>
+            <p data-i18n="projects.next.desc">Đang được cập nhật…</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Contact ===== -->
+    <section class="section section-dark" id="contact">
+      <div class="container contact-inner">
+        <h2 class="section-title light"><span>04</span> <span data-i18n="contact.title">Liên hệ</span></h2>
+        <p class="contact-lead" data-i18n="contact.lead">Bạn muốn hợp tác hoặc trao đổi? Hãy kết nối với tôi qua email hoặc LinkedIn.</p>
+        <div class="contact-links">
+          <a class="contact-card" href="mailto:cuongngba.work@gmail.com">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>
+            <span>
+              <small>Email</small>
+              cuongngba.work@gmail.com
+            </span>
+          </a>
+          <a class="contact-card" href="https://www.linkedin.com/in/cuongngba-work" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z"/></svg>
+            <span>
+              <small>LinkedIn</small>
+              in/cuongngba-work
+            </span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>© <span id="year"></span> Nguyễn Bá Cường</p>
+  </footer>
+
+  <script>
+    // ===== Từ điển song ngữ =====
+    const translations = {
+      en: {
+        "nav.about": "About",
+        "nav.skills": "Skills",
+        "nav.projects": "Projects",
+        "nav.contact": "Contact",
+        "hero.hello": "Hi, I'm",
+        "hero.role": "IT & Digital Transformation student · National Economics University (NEU)",
+        "hero.desc": "Connecting technology, data and education to build useful digital solutions.",
+        "hero.cta1": "View projects",
+        "hero.cta2": "Contact me",
+        "about.title": "About me",
+        "about.p1": "I'm a student of Information Technology and Digital Transformation at the National Economics University. I'm interested in how technology changes teaching and learning, especially in EdTech.",
+        "about.p2": "I have a background in data analysis and quantitative research, I'm a proactive learner and I enjoy teamwork to turn ideas into real products.",
+        "about.f1l": "University",
+        "about.f1v": "National Economics University (NEU)",
+        "about.f2l": "Major",
+        "about.f2v": "IT & Digital Transformation",
+        "about.f3l": "Interests",
+        "about.f3v": "EdTech, Data Analysis, Digital Transformation",
+        "skills.title": "Skills",
+        "skills.g1": "Analysis & Research",
+        "skills.g2": "Tools",
+        "skills.g3": "Soft skills",
+        "skills.quant": "Quantitative research",
+        "skills.s1": "Presentation",
+        "skills.s2": "Teamwork",
+        "skills.s3": "Problem solving",
+        "skills.s4": "Time management",
+        "projects.title": "Projects",
+        "projects.p1.title": "EdTech Project at NEU",
+        "projects.p1.desc": "Researching and proposing educational technology solutions for NEU students to improve the learning experience in a digital environment.",
+        "projects.tag.research": "Research",
+        "projects.tag.dt": "Digital Transformation",
+        "projects.next.title": "Next project",
+        "projects.next.desc": "Coming soon…",
+        "contact.title": "Contact",
+        "contact.lead": "Want to collaborate or have a chat? Reach me via email or LinkedIn."
+      }
+    };
+
+    // Lưu nội dung tiếng Việt gốc từ HTML
+    const viText = {};
+    document.querySelectorAll("[data-i18n]").forEach(el => {
+      viText[el.dataset.i18n] = el.innerHTML;
+    });
+
+    function setLang(lang) {
+      document.querySelectorAll("[data-i18n]").forEach(el => {
+        const key = el.dataset.i18n;
+        el.innerHTML = lang === "en" ? (translations.en[key] ?? viText[key]) : viText[key];
+      });
+      document.documentElement.lang = lang;
+      langBtn.textContent = lang === "en" ? "VI" : "EN";
+      try { localStorage.setItem("lang", lang); } catch (e) {}
+    }
+
+    const langBtn = document.getElementById("langBtn");
+    let current = "vi";
+    try { current = localStorage.getItem("lang") || "vi"; } catch (e) {}
+    if (current === "en") setLang("en");
+    langBtn.addEventListener("click", () => {
+      current = current === "vi" ? "en" : "vi";
+      setLang(current);
+    });
+
+    // ===== Menu di động =====
+    const menuBtn = document.getElementById("menuBtn");
+    const navLinks = document.getElementById("navLinks");
+    menuBtn.addEventListener("click", () => {
+      const open = navLinks.classList.toggle("open");
+      menuBtn.classList.toggle("open", open);
+      menuBtn.setAttribute("aria-expanded", open);
+    });
+    navLinks.querySelectorAll("a").forEach(a => a.addEventListener("click", () => {
+      navLinks.classList.remove("open");
+      menuBtn.classList.remove("open");
+      menuBtn.setAttribute("aria-expanded", false);
+    }));
+
+    // ===== Header đổ bóng khi cuộn =====
+    const header = document.getElementById("header");
+    window.addEventListener("scroll", () => {
+      header.classList.toggle("scrolled", window.scrollY > 10);
+    });
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
