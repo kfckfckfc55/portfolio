@@ -7,9 +7,14 @@
 const PORTFOLIO = {
   "name": "Nguyễn Bá Cường",
   "shortName": "Cường",
-  "role": " ",
-  "heroImage": "",
-  "avatar": "",
+  "role": {
+    "vi": "Sinh viên IT & Chuyển đổi số",
+    "en": "IT & Digital Transformation Student"
+  },
+  "heroImage": "assets/hero-cliff.webp",
+  "heroForeground": "assets/hero-fg-dark.webp",
+  "avatar": "assets/avatar.webp",
+  "avatarAlt": "assets/avatar-spider-black.webp",
   "contactPhoto": "",
   "about": {
     "vi": "[Điền 2–3 câu giới thiệu về bạn: bạn học gì, quan tâm điều gì, mục tiêu nghề nghiệp là gì.]",
