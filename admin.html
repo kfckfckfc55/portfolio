@@ -284,7 +284,26 @@
       set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); return true; } catch (e) { return false; } },
       del(k) { try { localStorage.removeItem(k); } catch (e) {} }
     };
-    let data = store.get(KEY_DRAFT, null) || clone(PUBLISHED);
+    // Nháp có thể được tạo từ data.js cũ hơn bản đang chạy: mục nào chưa sửa trong nháp
+    // thì lấy theo bản đang chạy, để lần đăng sau không ghi đè ngược nội dung mới.
+    const KEY_BASE = "portfolioDraftBase";
+    const same = (a, b) => JSON.stringify(a) === JSON.stringify(b);
+    const blank = v => v == null || (typeof v === "string" && !v.trim());
+    let data = store.get(KEY_DRAFT, null);
+    if (data) {
+      const base = store.get(KEY_BASE, null);
+      let merged = 0;
+      for (const k of Object.keys(PUBLISHED)) {
+        // Nháp kiểu cũ (chưa lưu bản gốc): chỉ lấy lại các mục đang trống.
+        const untouched = base ? same(data[k], base[k]) : blank(data[k]);
+        if (untouched && !same(data[k], PUBLISHED[k])) { data[k] = clone(PUBLISHED[k]); merged++; }
+      }
+      if (merged) {
+        store.set(KEY_DRAFT, data);
+        setTimeout(() => toast(`Bản nháp cũ: đã cập nhật ${merged} mục theo nội dung đang chạy trên web`), 0);
+      }
+    } else data = clone(PUBLISHED);
+    store.set(KEY_BASE, PUBLISHED);
     let previewImgs = store.get(KEY_IMGS, {});
     const pendingUploads = new Set(store.get("portfolioPending", []));
     ["education", "experience", "projects", "certificates", "awards", "gallery"].forEach(k => { if (!Array.isArray(data[k])) data[k] = []; });
@@ -625,6 +644,7 @@ const PORTFOLIO = ${JSON.stringify(data, null, 2)};
         }
         st.textContent = "Đang lưu data.js…";
         await putFile("data.js", b64utf8(buildDataJs()), "Cập nhật thông tin portfolio");
+        store.set(KEY_BASE, data);
         save();
         st.textContent = "✓ Đã đăng! Web sẽ cập nhật sau khoảng 1–2 phút."; st.className = "note ok";
         toast("Đã đăng lên GitHub! Web cập nhật sau 1–2 phút.", "ok");
