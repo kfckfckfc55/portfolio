@@ -88,7 +88,7 @@ const PORTFOLIO = {
       "tags": [
         "EdTech",
         "Python",
-        "Next.j"
+        "Next.js"
       ],
       "demo": "https://neuroadmap.vercel.app"
     },
@@ -122,6 +122,10 @@ const PORTFOLIO = {
     }
   ],
   "gallery": [
+    "assets/trip-castle.webp",
+    "assets/trip-lake.webp",
+    "assets/trip-sunset.webp",
+    "assets/trip-lake-rock.webp",
     "assets/img-2824-piho.jpg",
     "assets/img-0311-t5tu.png",
     "assets/img-4749-u5rn.jpg"
