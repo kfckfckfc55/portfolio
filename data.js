@@ -7,18 +7,13 @@
 const PORTFOLIO = {
   "name": "Nguyễn Bá Cường",
   "shortName": "Cường",
-  "role": {
-    "vi": "Sinh viên IT & Chuyển đổi số",
-    "en": "IT & Digital Transformation Student"
-  },
+  "role": " ",
   "heroImage": "assets/hero-cliff.webp",
-  "heroForeground": "assets/hero-fg-dark.webp",
   "avatar": "assets/avatar.webp",
-  "avatarAlt": "assets/avatar-spider-black.webp",
   "contactPhoto": "",
   "about": {
-    "vi": "[Điền 2–3 câu giới thiệu về bạn: bạn học gì, quan tâm điều gì, mục tiêu nghề nghiệp là gì.]",
-    "en": "[Write 2–3 sentences about yourself: what you study, what you care about, your career goals.]"
+    "vi": "tò mò, chủ động, cởi mở và ham học hỏi",
+    "en": "curious, proactive, open-minded and eager to learn"
   },
   "cvLink": "",
   "education": [
@@ -45,12 +40,15 @@ const PORTFOLIO = {
   ],
   "experience": [
     {
-      "org": "NEU",
+      "org": {
+        "vi": "Dự án EdTech tại NEU",
+        "en": "EdTech Project at NEU"
+      },
       "logo": "",
       "time": "2026",
       "title": {
-        "vi": "Dự án EdTech tại NEU",
-        "en": "EdTech Project at NEU"
+        "vi": "Leader",
+        "en": "Leader"
       },
       "place": {
         "vi": "Hà Nội",
@@ -79,28 +77,25 @@ const PORTFOLIO = {
       "image": "",
       "desc": {
         "vi": "NeuRoadmap tạo lộ trình cá nhân hoá dựa trên mục tiêu nghề nghiệp của sinh viên.",
-        "en": "[Short 1–2 sentence description.]"
+        "en": "NeuRoadmap"
       },
-      "details": {
-        "vi": "Leader",
-        "en": "[Details: context, what you did, results.]"
-      },
+      "details": "Leader",
       "tags": [
         "EdTech",
         "Python",
-        "Next.js"
+        "Next.j"
       ],
       "demo": "https://neuroadmap.vercel.app"
     },
     {
-      "title": "[Tên dự án 2]",
-      "image": "",
-      "desc": "[Mô tả ngắn]",
-      "details": "[Mô tả chi tiết]",
+      "title": "Kề Bên (PWA)",
+      "image": "assets/icon-512-g5ps.png",
+      "desc": "sổ sức khỏe cá nhân cho cả nhà, mở bằng trình duyệt và thêm được vào màn hình chính như một app.\n\n- Ghi thuốc và lịch uống, đánh dấu cữ đã uống; xem lịch sử 7 ngày.\n- Lịch khám, kèm danh sách đồ cần mang và sổ câu hỏi cho bác sĩ.\n- Dị ứng, bệnh nền, nhóm máu, thẻ y tế khẩn cấp, bản tóm tắt đưa bác sĩ xem.\n- Chỉ số sức khỏe có biểu đồ, đơn thuốc, giấy tờ khám, chi phí.\n- Nhiều hồ sơ trên một máy.\n- Dữ liệu chỉ lưu trên máy của bạn, không gửi lên máy chủ.",
+      "details": "Kề Bên - sổ sức khỏe & thuốc cho cả nhà, dữ liệu chỉ lưu trên máy bạn.",
       "tags": [
-        "[Công cụ]"
+        "TypeScript"
       ],
-      "demo": ""
+      "demo": "https://ke-ben.pages.dev"
     }
   ],
   "certificates": [
@@ -122,10 +117,6 @@ const PORTFOLIO = {
     }
   ],
   "gallery": [
-    "assets/trip-castle.webp",
-    "assets/trip-lake.webp",
-    "assets/trip-sunset.webp",
-    "assets/trip-lake-rock.webp",
     "assets/img-2824-piho.jpg",
     "assets/img-0311-t5tu.png",
     "assets/img-4749-u5rn.jpg"
@@ -137,5 +128,7 @@ const PORTFOLIO = {
     "facebook": "https://www.facebook.com/howlluvmeow",
     "instagram": "https://www.instagram.com/ng_bacuongg/",
     "tiktok": "https://www.tiktok.com/@ng_bacuong"
-  }
+  },
+  "heroForeground": "assets/hero-fg-dark.webp",
+  "avatarAlt": "assets/avatar-spider-black.webp"
 };
